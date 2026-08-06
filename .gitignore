@@ -17,3 +17,6 @@ npm-debug.log*
 # Local/session files
 .claude/
 *.log
+
+.vercel
+.env*
