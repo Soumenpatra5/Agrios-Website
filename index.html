@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<title>AgriOS Integrated Farms Pvt Ltd — Integrated farming in Jhargram, West Bengal</title>
+<meta name="description" content="AgriOS Integrated Farm Pvt Ltd — a closed-loop integrated farm in Jhargram, West Bengal. Poultry, livestock, aquaculture, horticulture, own-brand feed, breeding stock and farm-fresh produce.">
+<meta name="keywords" content="AgriOS, integrated farm, Jhargram, West Bengal, poultry farming, goat farming, pig farming, fish farming, aquaculture, animal feed, breeding stock, farm produce, contract broiler, Binpur">
+<meta name="author" content="AgriOS Integrated Farm Pvt Ltd">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://agriosfarm.in/">
+
+<!-- Open Graph (WhatsApp, Facebook, LinkedIn link previews) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AgriOS Integrated Farm Pvt Ltd">
+<meta property="og:title" content="AgriOS Integrated Farm — Farming, integrated the way nature intended">
+<meta property="og:description" content="A closed-loop integrated farm in Jhargram, West Bengal — poultry, livestock, aquaculture, horticulture and our own-brand feed, working as one system.">
+<meta property="og:url" content="https://agriosfarm.in/">
+<meta property="og:image" content="https://agriosfarm.in/og-image.jpg">
+<meta property="og:locale" content="en_IN">
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AgriOS Integrated Farm — Farming, integrated the way nature intended">
+<meta name="twitter:description" content="A closed-loop integrated farm in Jhargram, West Bengal. Poultry, livestock, fish, crops and our own-brand feed.">
+<meta name="twitter:image" content="https://agriosfarm.in/og-image.jpg">
+
+<!-- Geo / local SEO -->
+<meta name="geo.region" content="IN-WB">
+<meta name="geo.placename" content="Andharia, Binpur, Jhargram, West Bengal">
+<meta name="geo.position" content="22.45;86.95">
+
+<!-- Structured data for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "AgriOS Integrated Farm Pvt Ltd",
+  "description": "A closed-loop integrated farm in Jhargram, West Bengal — poultry, livestock, aquaculture, horticulture, own-brand feed and farm-fresh produce.",
+  "url": "https://agriosfarm.in/",
+  "logo": "https://agriosfarm.in/logo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Village Andharia, P.O. Andharia, P.S. Binpur, Block Binpur-I",
+    "addressLocality": "Jhargram",
+    "addressRegion": "West Bengal",
+    "postalCode": "721504",
+    "addressCountry": "IN"
+  },
+  "telephone": "+91-97491-63932",
+  "email": "Soumanpatra5@gmail.com"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --paper-2:#F3F1E9;
+    --green:#3D6B4F;
+    --green-d:#2F5540;
+    --green-tint:#EDF1EA;
+    --clay:#CC785C;
+    --clay-tint:#F7EDE8;
+    --ink:#1A1A17;
+    --muted:#5A574E;
+    --line:#E4E0D5;
+    --radius:14px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Hanken Grotesk',system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,249,245,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:17px;letter-spacing:-0.01em}
+  .brand .logo{
+    width:32px;height:32px;border-radius:9px;background:var(--green);
+    color:var(--paper);display:flex;align-items:center;justify-content:center;
+    font-weight:600;font-size:16px;overflow:hidden;flex-shrink:0;
+  }
+  .brand .logo img{width:100%;height:100%;object-fit:contain}
+  .brand-logo{height:44px;width:auto;display:block}
+  .brand small{display:block;font-weight:400;font-size:11px;color:var(--muted);letter-spacing:0.02em;margin-top:-3px}
+  .navlinks{display:flex;gap:28px;align-items:center}
+  .navlinks a{font-size:14.5px;color:var(--muted);font-weight:500;transition:color .18s;cursor:pointer}
+  .navlinks a:hover{color:var(--ink)}
+  .navlinks a.active{color:var(--green)}
+  .nav-cta{
+    background:var(--green);color:var(--paper)!important;padding:9px 18px;border-radius:9px;
+    font-size:14px;font-weight:500;transition:background .18s;
+  }
+  .nav-cta:hover{background:var(--green-d)}
+  .menu-btn{display:none;background:none;border:none;cursor:pointer;font-size:26px;color:var(--ink)}
+
+  /* ---------- Pages ---------- */
+  .page{display:none;animation:fade .4s ease}
+  .page.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .eyebrow{
+    font-size:12px;letter-spacing:1.6px;text-transform:uppercase;
+    color:var(--green);font-weight:600;margin-bottom:14px;
+  }
+  h1{font-size:clamp(30px,5vw,52px);line-height:1.08;font-weight:600;letter-spacing:-0.02em}
+  h2{font-size:clamp(24px,3.4vw,34px);line-height:1.15;font-weight:600;letter-spacing:-0.015em}
+  h3{font-size:19px;font-weight:600;letter-spacing:-0.01em}
+  .lead{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:60ch}
+  section{padding:72px 0}
+  .section-tight{padding:52px 0}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:84px 0 72px}
+  .hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+  .hero h1{margin-bottom:20px}
+  .hero .lead{margin-bottom:30px}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:12px 24px;border-radius:10px;font-weight:500;font-size:15px;cursor:pointer;transition:all .18s;border:1px solid transparent}
+  .btn-primary{background:var(--green);color:var(--paper)}
+  .btn-primary:hover{background:var(--green-d)}
+  .btn-ghost{background:transparent;color:var(--clay);border-color:var(--clay)}
+  .btn-ghost:hover{background:var(--clay-tint)}
+  .btn-dark{background:var(--ink);color:var(--paper)}
+  .btn-dark:hover{opacity:.88}
+
+  .stat-stack{display:flex;flex-direction:column;gap:14px}
+  .stat-card{border-radius:var(--radius);padding:22px 24px}
+  .stat-card .num{font-size:34px;font-weight:600;letter-spacing:-0.02em;line-height:1}
+  .stat-card .lbl{font-size:13.5px;color:var(--muted);margin-top:6px}
+  .stat-green{background:var(--green-tint)} .stat-green .num{color:var(--green)}
+  .stat-clay{background:var(--clay-tint)} .stat-clay .num{color:var(--clay)}
+  .stat-row{display:flex;gap:14px}
+  .stat-row .stat-card{flex:1}
+
+  /* ---------- Generic content ---------- */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px 24px;transition:transform .18s, box-shadow .18s;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:0 8px 26px rgba(45,85,64,0.08)}
+  .card .ic{
+    width:44px;height:44px;border-radius:11px;background:var(--green-tint);color:var(--green);
+    display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;
+  }
+  .card.clay .ic{background:var(--clay-tint);color:var(--clay)}
+  .card h3{margin-bottom:8px}
+  .card p{font-size:14.5px;color:var(--muted)}
+
+  .band{background:var(--paper-2)}
+  .band-green{background:var(--green);color:var(--paper)}
+  .vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:8px}
+  .vm-card{border-radius:var(--radius);padding:34px 32px;position:relative}
+  .vm-vision{background:var(--green);color:var(--paper)}
+  .vm-mission{background:#fff;border:1px solid var(--line)}
+  .vm-card .vm-tag{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;font-weight:600;margin-bottom:14px;display:block}
+  .vm-vision .vm-tag{color:#BFD6C7}
+  .vm-mission .vm-tag{color:var(--clay)}
+  .vm-card .vm-ic{font-size:26px;margin-bottom:14px}
+  .vm-card p{font-size:17px;line-height:1.55;font-weight:500}
+  .vm-vision p{color:#fff}
+  .vm-mission p{color:var(--ink)}
+  @media(max-width:860px){.vm-grid{grid-template-columns:1fr}}
+
+  /* ---------- Interactive AgriOS Cycle ---------- */
+  .cycle-wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-top:14px}
+  .cycle-stage{position:relative;width:100%;max-width:420px;aspect-ratio:1;margin:0 auto}
+  .cycle-svg{width:100%;height:100%;overflow:visible}
+  .cnode{cursor:pointer;transition:transform .2s}
+  .cnode circle{transition:all .2s}
+  .cnode text{font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;fill:#fff;pointer-events:none}
+  .cnode .cn-emoji{font-size:19px}
+  .cnode:hover{transform:scale(1.06)}
+  .cycle-center{font-family:'Hanken Grotesk',sans-serif}
+  .cycle-panel{min-height:200px}
+  .cycle-panel .cp-tag{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;font-weight:600;color:#F0C4B2;margin-bottom:10px;display:block}
+  .cycle-panel h3{color:#fff;font-size:24px;margin-bottom:10px}
+  .cycle-panel p{color:#DCE7DF;font-size:16px;line-height:1.6;margin-bottom:18px}
+  .cycle-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .cycle-flow span{background:rgba(255,255,255,0.12);color:#fff;font-size:13px;font-weight:500;padding:6px 13px;border-radius:20px}
+  .cycle-flow .arr{background:none;color:#F0C4B2;padding:0;font-size:15px}
+  .cycle-hint{font-size:13px;color:#BFD6C7;margin-top:16px;font-style:italic}
+  @media(max-width:860px){.cycle-wrap{grid-template-columns:1fr;gap:24px}.cycle-panel{min-height:auto}}
+
+  /* ---------- Impact numbers ---------- */
+  .impact{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff}
+  .impact-item{padding:30px 20px;text-align:center;border-right:1px solid var(--line)}
+  .impact-item:last-child{border-right:none}
+  .impact-item .in{font-size:38px;font-weight:600;color:var(--green);letter-spacing:-0.02em;line-height:1}
+  .impact-item .il{font-size:13.5px;color:var(--muted);margin-top:8px}
+  @media(max-width:680px){.impact{grid-template-columns:1fr 1fr}.impact-item:nth-child(2){border-right:none}.impact-item:nth-child(1),.impact-item:nth-child(2){border-bottom:1px solid var(--line)}}
+
+  /* ---------- Founder note ---------- */
+  .founder{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px}
+  .founder-photo{width:96px;height:96px;border-radius:50%;background:var(--green-tint);display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0}
+  .founder blockquote{font-size:19px;line-height:1.6;color:var(--ink);font-weight:500;margin-bottom:18px;font-style:normal}
+  .founder .sign{font-size:15px;color:var(--muted)}
+  .founder .sign strong{color:var(--ink);display:block;font-size:16px}
+  @media(max-width:680px){.founder{grid-template-columns:1fr;padding:30px 26px;text-align:center}.founder-photo{margin:0 auto}}
+
+  /* ---------- Future expansion timeline ---------- */
+  .roadmap{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:14px;position:relative}
+  .rm-step{position:relative;padding:0 12px}
+  .rm-step::before{content:'';position:absolute;top:14px;left:0;right:0;height:2px;background:rgba(255,255,255,0.2)}
+  .rm-step:first-child::before{left:50%}
+  .rm-step:last-child::before{right:50%}
+  .rm-dot{width:30px;height:30px;border-radius:50%;background:var(--clay);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;position:relative;z-index:2;margin:0 auto 16px}
+  .rm-step.done .rm-dot{background:#fff;color:var(--green-d)}
+  .rm-yr{font-size:12px;color:#F0C4B2;font-weight:600;text-align:center;margin-bottom:6px}
+  .rm-t{font-size:14px;font-weight:600;color:#fff;text-align:center;margin-bottom:6px}
+  .rm-d{font-size:12.5px;color:#CFE0D4;text-align:center;line-height:1.45}
+  @media(max-width:760px){.roadmap{grid-template-columns:1fr;gap:22px}.rm-step::before{display:none}.rm-dot{margin:0 0 10px}.rm-yr,.rm-t,.rm-d{text-align:left}}
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:760px;margin-top:8px}
+  .faq{border:1px solid var(--line);border-radius:12px;margin-bottom:12px;background:#fff;overflow:hidden}
+  .faq summary{padding:18px 22px;font-size:16px;font-weight:600;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:'+';font-size:22px;color:var(--green);font-weight:400;flex-shrink:0;transition:transform .2s}
+  .faq[open] summary::after{transform:rotate(45deg)}
+  .faq summary:hover{color:var(--green)}
+  .faq .faq-a{padding:0 22px 20px;font-size:15px;color:var(--muted);line-height:1.6}
+
+  /* ---------- Gallery ---------- */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+  .gallery .gcell{aspect-ratio:4/3;border-radius:12px;background:var(--green-tint);border:1px dashed #B9CCC0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--green);gap:6px;overflow:hidden}
+  .gallery .gcell.wide{grid-column:span 2}
+  .gallery .gcell .gi{font-size:30px;opacity:.7}
+  .gallery .gcell .gt{font-size:12.5px;color:var(--muted);font-weight:500}
+  .gallery .gcell img{width:100%;height:100%;object-fit:cover}
+  @media(max-width:760px){.gallery{grid-template-columns:1fr 1fr}.gallery .gcell.wide{grid-column:span 2}}
+
+  /* ---------- Map ---------- */
+  .map-frame{width:100%;aspect-ratio:16/7;border-radius:12px;background:var(--paper-2);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);text-align:center;padding:20px}
+  .map-frame .mi{font-size:32px}
+  .map-frame .mt{font-size:15px;font-weight:600;color:var(--ink)}
+  .map-frame .ms{font-size:13px;max-width:44ch}
+  .map-frame a{color:var(--green);font-weight:500}
+  .map-embed{width:100%;aspect-ratio:16/8;border-radius:12px;border:1px solid var(--line);overflow:hidden}
+  .map-embed iframe{width:100%;height:100%;border:0;display:block}
+  .map-cap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;font-size:14px;color:var(--muted)}
+  .map-cap .mc-addr{font-weight:500;color:var(--ink)}
+  .map-cap a{color:var(--green);font-weight:500}
+
+  /* ---------- Certifications / trust badges ---------- */
+  .certs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+  .cert{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px 18px;text-align:center;position:relative}
+  .cert .ci{width:48px;height:48px;border-radius:12px;background:var(--green-tint);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 12px}
+  .cert .ct{font-size:15px;font-weight:600;margin-bottom:3px}
+  .cert .cd{font-size:12.5px;color:var(--muted);line-height:1.45}
+  .cert .cpend{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;background:var(--clay-tint);color:var(--clay);padding:3px 9px;border-radius:20px;margin-top:10px}
+  @media(max-width:760px){.certs{grid-template-columns:1fr 1fr}}
+  .band-green .eyebrow{color:#BFD6C7}
+  .band-green .lead{color:#DCE7DF}
+
+  .feature-list{list-style:none;display:flex;flex-direction:column;gap:16px;margin-top:8px}
+  .feature-list li{display:flex;gap:12px;font-size:15.5px;color:var(--muted)}
+  .feature-list .dot{color:var(--clay);font-weight:700;flex-shrink:0}
+
+  .loop{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:12px}
+  .loop-step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;text-align:center}
+  .loop-step .n{font-size:12px;color:var(--clay);font-weight:600;letter-spacing:1px}
+  .loop-step p{font-size:14px;margin-top:6px;color:var(--ink);font-weight:500}
+  .loop-step small{color:var(--muted);font-size:12.5px;font-weight:400}
+
+  /* ---------- Products ---------- */
+  .prod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+  .prod{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .prod .top{height:120px;display:flex;align-items:center;justify-content:center;font-size:46px}
+  .prod .body{padding:20px 22px}
+  .prod h3{margin-bottom:4px}
+  .prod p{font-size:14px;color:var(--muted);margin-bottom:14px}
+  .soon{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+    background:var(--clay-tint);color:var(--clay);padding:5px 11px;border-radius:20px}
+  .avail{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+    background:var(--green-tint);color:var(--green);padding:5px 11px;border-radius:20px}
+  .prod-cat{margin-top:44px;margin-bottom:20px}
+  .prod-cat:first-of-type{margin-top:8px}
+  .prod-cat .pc-eye{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:6px}
+  .prod-cat h2{font-size:24px;font-weight:600}
+  .prod-cat p{font-size:14.5px;color:var(--muted);margin-top:6px;max-width:56ch}
+  .feed-feature{display:grid;grid-template-columns:1.1fr 1fr;gap:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:8px}
+  .feed-left{background:var(--green);color:#fff;padding:44px 42px}
+  .feed-left .fl-eye{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:#F0C4B2;font-weight:600;margin-bottom:14px}
+  .feed-left h2{font-size:30px;font-weight:600;color:#fff;margin-bottom:14px;line-height:1.15}
+  .feed-left p{font-size:15.5px;color:#DCE7DF;line-height:1.6;margin-bottom:14px}
+  .feed-left .fl-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.12);padding:8px 14px;border-radius:20px;font-size:13px;font-weight:500;margin-top:4px}
+  .feed-right{background:var(--green-tint);padding:44px 42px;display:flex;flex-direction:column;justify-content:center}
+  .feed-right .fr-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:18px}
+  .feed-right .fr-row:last-child{margin-bottom:0}
+  .feed-right .fr-ic{font-size:22px;flex-shrink:0}
+  .feed-right .fr-t{font-size:15px;font-weight:600;margin-bottom:2px}
+  .feed-right .fr-d{font-size:13.5px;color:var(--muted);line-height:1.5}
+  @media(max-width:760px){.feed-feature{grid-template-columns:1fr}.feed-left,.feed-right{padding:32px 28px}}
+
+  /* ---------- Contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:13.5px;font-weight:500;margin-bottom:6px}
+  .field input,.field textarea{
+    width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;
+    font-family:inherit;font-size:15px;background:#fff;color:var(--ink);transition:border-color .18s, box-shadow .18s;
+  }
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(61,107,79,.12)}
+  .field textarea{resize:vertical;min-height:120px}
+  .contact-info{background:var(--green-tint);border-radius:var(--radius);padding:30px}
+  .info-row{display:flex;gap:14px;align-items:flex-start;margin-bottom:22px}
+  .info-row .ic{width:40px;height:40px;border-radius:10px;background:#fff;color:var(--green);
+    display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+  .info-row .t{font-size:13px;color:var(--muted)}
+  .info-row .v{font-size:15.5px;font-weight:500;color:var(--ink)}
+  .wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+    background:#25D366;color:#fff;padding:13px;border-radius:11px;font-weight:600;font-size:15px;cursor:pointer;transition:opacity .18s}
+  .wa-btn:hover{opacity:.9}
+  .note{font-size:12.5px;color:var(--muted);margin-top:10px}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink);color:#CFCCC3;padding:52px 0 30px;margin-top:20px}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:36px;margin-bottom:34px}
+  footer .brand{color:#fff;margin-bottom:14px}
+  footer .brand .logo{background:var(--clay)}
+  .footer-logo{width:132px;height:auto;background:#fff;border-radius:12px;padding:12px;margin-bottom:14px;display:block}
+  .footer-tag{font-size:13px;color:var(--clay);font-weight:600;letter-spacing:.3px;margin-top:6px}
+  footer p{font-size:14px;color:#9F9C93;max-width:38ch}
+  footer h4{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#7C7970;margin-bottom:14px;font-weight:600}
+  footer ul{list-style:none}
+  footer ul li{margin-bottom:9px}
+  footer ul a{font-size:14px;color:#CFCCC3;cursor:pointer;transition:color .15s}
+  footer ul a:hover{color:#fff}
+  .foot-bottom{border-top:1px solid #33322D;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:#7C7970}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:860px){
+    .hero-grid,.grid-2,.contact-grid,.foot-grid{grid-template-columns:1fr;gap:32px}
+    .navlinks{
+      position:fixed;top:74px;left:0;right:0;background:var(--paper);flex-direction:column;
+      align-items:flex-start;padding:18px 24px;gap:6px;border-bottom:1px solid var(--line);
+      transform:translateY(-140%);transition:transform .28s;height:auto;
+    }
+    .navlinks.open{transform:none}
+    .navlinks a{padding:10px 0;width:100%;font-size:16px}
+    .nav-cta{margin-top:8px}
+    .menu-btn{display:block}
+    section,.hero{padding:52px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand" onclick="go('home')" style="cursor:pointer">
+      <img class="brand-logo" src="logo-header.png" alt="AgriOS Integrated Farms Private Limited">
+    </div>
+    <nav class="navlinks" id="navlinks">
+      <a data-nav="home" onclick="go('home')">Home</a>
+      <a data-nav="about" onclick="go('about')">About</a>
+      <a data-nav="what" onclick="go('what')">What we do</a>
+      <a data-nav="products" onclick="go('products')">Products</a>
+      <a class="nav-cta" onclick="go('contact')">Contact</a>
+    </nav>
+    <button class="menu-btn" aria-label="Menu" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
+
+<!-- ============ HOME ============ -->
+<main id="home" class="page active">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Integrated Farm · Jhargram, West Bengal</div>
+        <h1>Farming, integrated<br>the way nature intended.</h1>
+        <p class="lead">Poultry, livestock, aquaculture and horticulture, run as one closed-loop system where nothing is wasted — the by-product of one enterprise feeds the next.</p>
+        <div class="btn-row" style="margin-top:30px">
+          <button class="btn btn-primary" onclick="go('contact')">Schedule a farm visit</button>
+          <button class="btn btn-ghost" onclick="go('what')">See what we do</button>
+        </div>
+      </div>
+      <div class="stat-stack">
+        <div class="stat-card stat-green">
+          <div class="num">5,000</div>
+          <div class="lbl">birds per batch · contract broiler poultry</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-card stat-clay">
+            <div class="num">4</div>
+            <div class="lbl">fish ponds</div>
+          </div>
+          <div class="stat-card stat-green">
+            <div class="num">16</div>
+            <div class="lbl">bigha of land</div>
+          </div>
+        </div>
+        <div class="stat-card stat-clay">
+          <div class="num">9</div>
+          <div class="lbl">enterprises under one roof</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band section-tight">
+    <div class="wrap">
+      <div class="eyebrow" style="text-align:center">The AgriOS idea</div>
+      <h2 style="text-align:center;max-width:20ch;margin:0 auto 14px">One farm, many enterprises, zero waste</h2>
+      <p class="lead" style="text-align:center;margin:0 auto">Most farms do one thing. We connect several — so poultry litter becomes crop nutrition, pond water irrigates the orchard, and every enterprise makes the next one stronger.</p>
+      <div class="loop">
+        <div class="loop-step"><div class="n">01</div><p>Poultry &amp; livestock<small style="display:block">produce manure</small></p></div>
+        <div class="loop-step"><div class="n">02</div><p>Compost &amp; vermicompost<small style="display:block">enrich the soil</small></p></div>
+        <div class="loop-step"><div class="n">03</div><p>Fruit, fodder &amp; ponds<small style="display:block">grow on it</small></p></div>
+        <div class="loop-step"><div class="n">04</div><p>Yield &amp; income<small style="display:block">feed back in</small></p></div>
+      </div>
+      <p style="text-align:center;max-width:52ch;margin:30px auto 0;font-size:15px;color:var(--muted)">Our vision: to become Eastern India's model integrated farm — proving that scientific, sustainable farming can also be profitable. <a onclick="go('about')" style="color:var(--green);font-weight:500;cursor:pointer">Read our story →</a></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">What we raise &amp; grow</div>
+      <h2 style="margin-bottom:34px">A diversified farm, built to last</h2>
+      <div class="cards">
+        <div class="card"><div class="ic">🐔</div><h3>Contract poultry</h3><p>Broiler farming with an assured buyer, feed and technical support — our anchor enterprise.</p></div>
+        <div class="card clay"><div class="ic">🐐</div><h3>Goat &amp; pig</h3><p>Scientific breeding units for goats and pigs, backed by formal ICAR training.</p></div>
+        <div class="card"><div class="ic">🐟</div><h3>Aquaculture</h3><p>Four ponds running composite and polyculture fish farming, integrated with duck.</p></div>
+        <div class="card clay"><div class="ic">🍌</div><h3>Horticulture</h3><p>Banana, papaya, guava and coconut with black pepper along the boundary.</p></div>
+      </div>
+      <div style="text-align:center;margin-top:36px">
+        <button class="btn btn-dark" onclick="go('what')">Explore all enterprises</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="eyebrow" style="text-align:center;margin-bottom:26px">The farm by the numbers</div>
+      <div class="impact">
+        <div class="impact-item"><div class="in">16</div><div class="il">bigha of farmland</div></div>
+        <div class="impact-item"><div class="in">5,000</div><div class="il">birds per batch</div></div>
+        <div class="impact-item"><div class="in">9</div><div class="il">integrated enterprises</div></div>
+        <div class="impact-item"><div class="in">4</div><div class="il">fish ponds</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:20px">
+    <div class="wrap">
+      <div class="eyebrow">A word from our founder</div>
+      <h2 style="margin-bottom:26px;max-width:20ch">Built on the ground, not on paper</h2>
+      <div class="founder">
+        <div class="founder-photo">👨‍🌾</div>
+        <div>
+          <blockquote>"I didn't start with a plan on paper — I started on real farms, learning pigs, poultry and fish by doing. AgriOS is my vision of what a modern Indian farm can be: diversified, scientific, sustainable, and profitable. We're building something the next generation of farmers can look to."</blockquote>
+          <div class="sign"><strong>Soumen Patra</strong>Founder &amp; Managing Promoter, AgriOS Integrated Farm Pvt Ltd</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-green">
+    <div class="wrap" style="text-align:center">
+      <div class="eyebrow">Coming soon</div>
+      <h2 style="max-width:22ch;margin:0 auto 14px">Farm-fresh products, direct from our land</h2>
+      <p class="lead" style="margin:0 auto 28px">Honey, eggs, fruit and meat — raised responsibly and coming to market soon under the AgriOS name.</p>
+      <button class="btn" style="background:var(--paper);color:var(--green)" onclick="go('products')">See what's coming</button>
+    </div>
+  </section>
+</main>
+
+<!-- ============ ABOUT ============ -->
+<main id="about" class="page">
+  <section class="hero" style="padding-bottom:40px">
+    <div class="wrap">
+      <div class="eyebrow">About us</div>
+      <h1 style="max-width:16ch;margin-bottom:20px">Rooted in Jhargram, built on real experience.</h1>
+      <p class="lead">AgriOS Integrated Farm Pvt Ltd is a commercial integrated farm on 16 bigha of land at Andharia, Binpur — bringing scientific, sustainable farming to the heart of West Bengal.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:20px">
+    <div class="wrap grid-2">
+      <div>
+        <h2 style="margin-bottom:16px">Our story</h2>
+        <p style="color:var(--muted);margin-bottom:14px">The farm brings together poultry, livestock, aquaculture and horticulture into a single, deliberately connected system. Rather than depending on any one product or season, AgriOS spreads risk across many enterprises — while letting each one strengthen the others.</p>
+        <p style="color:var(--muted)">The result is a farm that's more resilient, more sustainable, and better for the land it sits on. Our long-term vision is to grow into a model farm, a training centre, and a trusted brand for farm-fresh produce.</p>
+      </div>
+      <div>
+        <div class="card" style="background:var(--green-tint);border:none">
+          <h3 style="margin-bottom:14px">The promoter</h3>
+          <p style="color:var(--muted);margin-bottom:16px;font-size:15px">Led by <strong style="color:var(--ink)">Soumen Patra</strong>, who brings hands-on farm experience across pig, poultry and fish farming, plus formal training in scientific goat rearing from ICAR–IVRI, Kolkata.</p>
+          <ul class="feature-list" style="margin-top:0">
+            <li><span class="dot">•</span> 2 years of practical farm management</li>
+            <li><span class="dot">•</span> ICAR–IVRI goat husbandry training</li>
+            <li><span class="dot">•</span> Experience across multiple livestock units</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:8px">
+    <div class="wrap">
+      <div class="eyebrow">Why we exist</div>
+      <h2 style="margin-bottom:26px">Our vision &amp; mission</h2>
+      <div class="vm-grid">
+        <div class="vm-card vm-vision">
+          <div class="vm-ic">🌅</div>
+          <span class="vm-tag">Our vision</span>
+          <p>To become Eastern India's model integrated farm — a self-sustaining enterprise that proves modern, scientific and environmentally responsible farming can be profitable, and that inspires a new generation of rural entrepreneurs.</p>
+        </div>
+        <div class="vm-card vm-mission">
+          <div class="vm-ic">🎯</div>
+          <span class="vm-tag">Our mission</span>
+          <p>To run a diversified, closed-loop farm where poultry, livestock, aquaculture and horticulture strengthen one another — producing safe, quality food, creating local employment, caring for the land, and building a trusted brand for farm-fresh produce.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="eyebrow">What guides us</div>
+      <h2 style="margin-bottom:34px">Our principles</h2>
+      <div class="cards">
+        <div class="card"><div class="ic">♻️</div><h3>Nothing wasted</h3><p>Every by-product becomes an input somewhere else on the farm.</p></div>
+        <div class="card clay"><div class="ic">🌱</div><h3>Built to last</h3><p>Diversified enterprises make the farm resilient to market and weather swings.</p></div>
+        <div class="card"><div class="ic">🔬</div><h3>Done scientifically</h3><p>Modern breeds, proper housing, biosecurity and record-keeping throughout.</p></div>
+        <div class="card clay"><div class="ic">🤝</div><h3>Good for the region</h3><p>Local jobs, fresh food, and a model others can learn from.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">A look around</div>
+      <h2 style="margin-bottom:8px">The farm in pictures</h2>
+      <p class="lead" style="margin-bottom:26px">Real photos of the land, animals and produce — coming soon.</p>
+      <div class="gallery">
+        <div class="gcell wide"><span class="gi">🌾</span><span class="gt">The farm &amp; land</span></div>
+        <div class="gcell"><span class="gi">🐔</span><span class="gt">Poultry shed</span></div>
+        <div class="gcell"><span class="gi">🐐</span><span class="gt">Goat unit</span></div>
+        <div class="gcell"><span class="gi">🐟</span><span class="gt">Fish ponds</span></div>
+        <div class="gcell wide"><span class="gi">🍌</span><span class="gt">Plantation &amp; produce</span></div>
+      </div>
+      <p class="note" style="margin-top:14px;font-size:12.5px;color:var(--muted)">Photo placeholders — real images will be added here.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="eyebrow">Registered &amp; compliant</div>
+      <h2 style="margin-bottom:8px">Certifications &amp; trust</h2>
+      <p class="lead" style="margin-bottom:26px">We operate as a registered private limited company and are building the certifications that let us supply food, feed and produce with confidence.</p>
+      <div class="certs">
+        <div class="cert">
+          <div class="ci">🏛️</div>
+          <div class="ct">Registered Pvt Ltd</div>
+          <div class="cd">Incorporated as AgriOS Integrated Farm Pvt Ltd</div>
+        </div>
+        <div class="cert">
+          <div class="ci">🧾</div>
+          <div class="ct">GST Registered</div>
+          <div class="cd">GSTIN to be displayed here</div>
+          <span class="cpend">Coming</span>
+        </div>
+        <div class="cert">
+          <div class="ci">✅</div>
+          <div class="ct">FSSAI Licensed</div>
+          <div class="cd">For food &amp; feed — licence to be displayed</div>
+          <span class="cpend">In process</span>
+        </div>
+        <div class="cert">
+          <div class="ci">🏅</div>
+          <div class="ct">Udyam / MSME</div>
+          <div class="cd">Registered under MSME — number to follow</div>
+          <span class="cpend">Coming</span>
+        </div>
+      </div>
+      <p class="note" style="margin-top:16px;font-size:12.5px;color:var(--muted)">Certification details are placeholders — real licence numbers and badges will be added as they're issued.</p>
+    </div>
+  </section>
+</main>
+
+<!-- ============ WHAT WE DO ============ -->
+<main id="what" class="page">
+  <section class="hero" style="padding-bottom:40px">
+    <div class="wrap">
+      <div class="eyebrow">What we do</div>
+      <h1 style="max-width:18ch;margin-bottom:20px">Nine enterprises, one connected system.</h1>
+      <p class="lead">Each unit earns on its own — and feeds the others. Here's how the farm fits together.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:24px">
+    <div class="wrap">
+      <div class="cards">
+        <div class="card"><div class="ic">🐔</div><h3>Contract poultry</h3><p>Our anchor enterprise: broiler farming under a full-integrator model that provides chicks, feed, medicine and technical support, with an assured buyer. Starts at 5,000 birds per batch.</p></div>
+        <div class="card clay"><div class="ic">🐖</div><h3>Pig farming</h3><p>A scientific breeding unit built to modern standards — starting with a breeding herd and growing toward commercial production over five years.</p></div>
+        <div class="card"><div class="ic">🐐</div><h3>Goat farming</h3><p>A semi-intensive breeding unit for meat and stock, backed by formal ICAR training, with proper housing, fodder and health protocols.</p></div>
+        <div class="card clay"><div class="ic">🦆</div><h3>Duck farming</h3><p>100 ducks integrated with the fish ponds — droppings feed the ponds, and the flock gives both eggs and meat.</p></div>
+        <div class="card"><div class="ic">🐟</div><h3>Aquaculture</h3><p>Four scientifically managed ponds running composite and polyculture fish farming — Rohu, Catla, Mrigal, Grass Carp, Tilapia and more.</p></div>
+        <div class="card clay"><div class="ic">🍌</div><h3>Horticulture</h3><p>Banana and Red Lady papaya as the main crops, guava as a long-term orchard, plus coconut and black pepper along the boundary.</p></div>
+        <div class="card"><div class="ic">🐝</div><h3>Beekeeping</h3><p>Starting with 5 hives and scaling up — for honey, beeswax and better pollination across the farm's crops.</p></div>
+        <div class="card clay"><div class="ic">🌿</div><h3>Vermicompost</h3><p>Turning poultry litter and animal manure into high-value organic compost — for our own crops and for sale.</p></div>
+        <div class="card"><div class="ic">🌾</div><h3>AgriOS Feed</h3><p>Manufacturing our own animal feed on a proprietary in-house formula — for our units and to sell to other farmers under the AgriOS brand.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-green">
+    <div class="wrap">
+      <div class="eyebrow">The AgriOS Cycle</div>
+      <h2 style="margin-bottom:16px;max-width:24ch">One farm, working as a living system</h2>
+      <p class="lead" style="margin-bottom:10px">This is what makes us different. Every enterprise feeds the next — waste becomes a resource, and the whole farm grows stronger together. Tap any part of the cycle to see how it connects.</p>
+      <div class="cycle-wrap">
+        <div class="cycle-stage">
+          <svg class="cycle-svg" viewBox="0 0 320 320" role="img" aria-label="Interactive AgriOS integrated farm cycle">
+            <circle cx="160" cy="160" r="96" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-dasharray="4 6"/>
+            <g class="cycle-center" text-anchor="middle">
+              <text x="160" y="152" style="font-size:15px;font-weight:600;fill:#fff">AgriOS</text>
+              <text x="160" y="172" style="font-size:12px;fill:#BFD6C7">Cycle</text>
+            </g>
+            <g class="cnode" data-node="0" onclick="setCycle(0)" transform="translate(160,44)">
+              <circle r="30" fill="#CC785C"/>
+              <text class="cn-emoji" text-anchor="middle" y="-2">🐔</text>
+              <text text-anchor="middle" y="16">Livestock</text>
+            </g>
+            <g class="cnode" data-node="1" onclick="setCycle(1)" transform="translate(258,132)">
+              <circle r="30" fill="#4E8063"/>
+              <text class="cn-emoji" text-anchor="middle" y="-2">🌿</text>
+              <text text-anchor="middle" y="16">Compost</text>
+            </g>
+            <g class="cnode" data-node="2" onclick="setCycle(2)" transform="translate(220,250)">
+              <circle r="30" fill="#4E8063"/>
+              <text class="cn-emoji" text-anchor="middle" y="-2">🍌</text>
+              <text text-anchor="middle" y="16">Crops</text>
+            </g>
+            <g class="cnode" data-node="3" onclick="setCycle(3)" transform="translate(100,250)">
+              <circle r="30" fill="#4E8063"/>
+              <text class="cn-emoji" text-anchor="middle" y="-2">🐟</text>
+              <text text-anchor="middle" y="16">Ponds</text>
+            </g>
+            <g class="cnode" data-node="4" onclick="setCycle(4)" transform="translate(62,132)">
+              <circle r="30" fill="#CC785C"/>
+              <text class="cn-emoji" text-anchor="middle" y="-2">🌾</text>
+              <text text-anchor="middle" y="16">Fodder</text>
+            </g>
+          </svg>
+        </div>
+        <div class="cycle-panel" id="cyclePanel">
+          <span class="cp-tag" id="cpTag">Livestock</span>
+          <h3 id="cpTitle">Poultry, pig, goat &amp; duck</h3>
+          <p id="cpText">Our animals are the engine of the farm. Beyond meat, eggs and income, they produce a steady supply of litter and manure — the raw material that powers everything else.</p>
+          <div class="cycle-flow" id="cpFlow">
+            <span>Manure &amp; litter</span><span class="arr">→</span><span>Compost unit</span>
+          </div>
+          <p class="cycle-hint">Tap each stage of the wheel to follow the loop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap grid-2">
+      <div>
+        <div class="eyebrow">Sustainability</div>
+        <h2 style="margin-bottom:16px">Better for the land, better for business</h2>
+        <p style="color:var(--muted)">Integration isn't just good farming — it's good economics. Recycling waste cuts input costs, reduces chemical use, and builds soil health year after year.</p>
+      </div>
+      <ul class="feature-list">
+        <li><span class="dot">✓</span> Closed-loop waste recycling across every unit</li>
+        <li><span class="dot">✓</span> Reduced dependence on chemical fertilizer</li>
+        <li><span class="dot">✓</span> Rainwater harvesting and water reuse</li>
+        <li><span class="dot">✓</span> Renewable energy planned as the farm grows</li>
+        <li><span class="dot">✓</span> Boundary plantation for green cover and income</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band-green">
+    <div class="wrap">
+      <div class="eyebrow">Where we're headed</div>
+      <h2 style="margin-bottom:16px;max-width:22ch">A farm built to grow, year on year</h2>
+      <p class="lead" style="margin-bottom:38px">AgriOS is planned in phases — each year adds capacity, technology and new income streams, building toward a complete, self-reliant agri-enterprise.</p>
+      <div class="roadmap">
+        <div class="rm-step done">
+          <div class="rm-dot">✓</div>
+          <div class="rm-yr">Year 1 · Now</div>
+          <div class="rm-t">Foundation</div>
+          <div class="rm-d">Contract poultry, goat, duck, fish, plantation and the core farm set up.</div>
+        </div>
+        <div class="rm-step">
+          <div class="rm-dot">2</div>
+          <div class="rm-yr">Year 2</div>
+          <div class="rm-t">Scale up</div>
+          <div class="rm-d">EC poultry house, pig breeding unit, automation and expanded stock.</div>
+        </div>
+        <div class="rm-step">
+          <div class="rm-dot">3</div>
+          <div class="rm-yr">Year 3</div>
+          <div class="rm-t">Self-reliance</div>
+          <div class="rm-d">Own feed mill, solar power and expanded beekeeping.</div>
+        </div>
+        <div class="rm-step">
+          <div class="rm-dot">5</div>
+          <div class="rm-yr">Year 5</div>
+          <div class="rm-t">Value addition</div>
+          <div class="rm-d">Cold storage, meat processing, cocopeat unit and branded farm products.</div>
+        </div>
+        <div class="rm-step">
+          <div class="rm-dot">10</div>
+          <div class="rm-yr">Year 10</div>
+          <div class="rm-t">Beyond the farm</div>
+          <div class="rm-d">Training centre, agri-tourism and a digital farm platform.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ PRODUCTS ============ -->
+<main id="products" class="page">
+  <section class="hero" style="padding-bottom:32px">
+    <div class="wrap">
+      <div class="eyebrow">Products</div>
+      <h1 style="max-width:18ch;margin-bottom:20px">From our farm — and our own brand.</h1>
+      <p class="lead">A growing range: live breeding stock, fresh farm produce, honest farm-fresh goods, and AgriOS-brand feed made on our own proprietary formula.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:12px">
+    <div class="wrap">
+
+      <!-- FEED BRAND FEATURE -->
+      <div class="feed-feature">
+        <div class="feed-left">
+          <div class="fl-eye">AgriOS Feed — our own brand</div>
+          <h2>Feed we make ourselves, on our own formula</h2>
+          <p>We manufacture our own animal feed under the <strong style="color:#fff">AgriOS</strong> brand, using a proprietary formula developed in-house — balanced nutrition, consistent quality, and better feed conversion. It powers our own farm, and it's available for other farmers too.</p>
+          <p>The formula is our own, kept confidential — what you get is the result: reliable feed you can trust batch after batch.</p>
+          <span class="fl-badge">🔒 Proprietary formula · made in-house</span>
+        </div>
+        <div class="feed-right">
+          <div class="fr-row"><span class="fr-ic">🌾</span><div><div class="fr-t">Poultry, pig, goat &amp; fish feed</div><div class="fr-d">A range built for each of our own units — and yours.</div></div></div>
+          <div class="fr-row"><span class="fr-ic">⚖️</span><div><div class="fr-t">Balanced &amp; consistent</div><div class="fr-d">Formulated for growth, health and a better feed conversion ratio.</div></div></div>
+          <div class="fr-row"><span class="fr-ic">🏷️</span><div><div class="fr-t">The AgriOS brand</div><div class="fr-d">Sold under our own name — one brand across farm and feed.</div></div></div>
+        </div>
+      </div>
+
+      <!-- BREEDING STOCK -->
+      <div class="prod-cat">
+        <div class="pc-eye">Available fairly soon</div>
+        <h2>Live breeding stock</h2>
+        <p>Healthy, well-raised young stock from our own breeding units — for farmers building or expanding their own farms.</p>
+      </div>
+      <div class="prod-grid">
+        <div class="prod">
+          <div class="top" style="background:var(--clay-tint)">🐷</div>
+          <div class="body"><span class="avail">Coming soon</span><h3 style="margin-top:12px">Piglets</h3><p>Crossbred piglets from our scientific breeding unit.</p></div>
+        </div>
+        <div class="prod">
+          <div class="top" style="background:var(--green-tint)">🐐</div>
+          <div class="body"><span class="avail">Coming soon</span><h3 style="margin-top:12px">Goat kids</h3><p>Healthy kids for meat and breeding, ICAR-guided rearing.</p></div>
+        </div>
+        <div class="prod">
+          <div class="top" style="background:var(--clay-tint)">🦆</div>
+          <div class="body"><span class="avail">Coming soon</span><h3 style="margin-top:12px">Ducklings</h3><p>Khaki Campbell and Pekin ducklings for eggs and meat.</p></div>
+        </div>
+        <div class="prod">
+          <div class="top" style="background:var(--green-tint)">🐟</div>
+          <div class="body"><span class="avail">Coming soon</span><h3 style="margin-top:12px">Fish fingerlings</h3><p>Rohu, Catla, Mrigal and more, from our own ponds.</p></div>
+        </div>
+      </div>
+
+      <!-- FARM PRODUCE -->
+      <div class="prod-cat">
+        <div class="pc-eye">From our fields</div>
+        <h2>Farm produce</h2>
+        <p>Fresh fruit and spice, grown on organic compost from our own integrated cycle.</p>
+      </div>
+      <div class="prod-grid">
+        <div class="prod">
+          <div class="top" style="background:var(--green-tint)">🍌</div>
+          <div class="body"><span class="soon">Coming soon</span><h3 style="margin-top:12px">Bananas</h3><p>Malbhog, Martaman and more, ripened on the plant.</p></div>
+        </div>
+        <div class="prod">
+          <div class="top" style="background:var(--clay-tint)">🫑</div>
+          <div class="body"><span class="soon">Coming soon</span><h3 style="margin-top:12px">Papaya</h3><p>Red Lady 786 — sweet, firm and market-grade.</p></div>
+        </div>
+        <div class="prod">
+          <div class="top" style="background:var(--green-tint)">🌶️</div>
+          <div class="body"><span class="soon">Coming soon</span><h3 style="margin-top:12px">Black pepper</h3><p>Golmorich grown along our boundary plantation.</p></div>
+        </div>
+      </div>
+
+      <!-- FARM FRESH -->
+      <div class="prod-cat">
+        <div class="pc-eye">Coming soon</div>
+        <h2>Farm-fresh goods</h2>
+        <p>Honest, responsibly-raised products, coming to market under the AgriOS name.</p>
+      </div>
+      <div class="prod-grid">
+        <div class="prod">
+          <div class="top" style="background:var(--clay-tint)">🍯</div>
+          <div class="body"><span class="soon">Coming soon</span><h3 style="margin-top:12px">Raw honey</h3><p>Pure honey from our own hives, harvested on the farm.</p></div>
+        </div>
+        <div class="prod">
+          <div class="top" style="background:var(--green-tint)">🥚</div>
+          <div class="body"><span class="soon">Coming soon</span><h3 style="margin-top:12px">Farm eggs</h3><p>Fresh duck and poultry eggs from healthy, well-kept flocks.</p></div>
+        </div>
+        <div class="prod">
+          <div class="top" style="background:var(--clay-tint)">🥩</div>
+          <div class="body"><span class="soon">Coming soon</span><h3 style="margin-top:12px">Farm meat</h3><p>Responsibly-raised goat, pig and poultry from our own units.</p></div>
+        </div>
+        <div class="prod">
+          <div class="top" style="background:var(--green-tint)">🌱</div>
+          <div class="body"><span class="soon">Year 5</span><h3 style="margin-top:12px">Cocopeat</h3><p>A dedicated cocopeat unit — planned as we scale.</p></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:44px;background:var(--paper-2);border:none;text-align:center;padding:38px">
+        <h3 style="margin-bottom:8px">Interested in our stock, produce or feed?</h3>
+        <p style="color:var(--muted);margin-bottom:20px;max-width:48ch;margin-left:auto;margin-right:auto">Tell us what you need and we'll let you know availability and pricing.</p>
+        <button class="btn btn-primary" onclick="go('contact')">Get in touch</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ CONTACT ============ -->
+<main id="contact" class="page">
+  <section class="hero" style="padding-bottom:40px">
+    <div class="wrap">
+      <div class="eyebrow">Contact</div>
+      <h1 style="max-width:16ch;margin-bottom:20px">Let's talk — or better, let's meet.</h1>
+      <p class="lead">Whether you're a buyer, a partner, an integrator or just curious about the farm — send a message, or schedule a visit to see the farm for yourself.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:24px">
+    <div class="wrap contact-grid">
+      <div>
+        <h3 style="margin-bottom:18px">Send us a message</h3>
+        <form onsubmit="submitForm(event)">
+          <div class="field"><label>Name</label><input type="text" required placeholder="Your name"></div>
+          <div class="field"><label>Email</label><input type="email" required placeholder="you@example.com"></div>
+          <div class="field"><label>Phone</label><input type="tel" placeholder="Your phone number"></div>
+          <div class="field"><label>Message</label><textarea required placeholder="How can we help?"></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Send message</button>
+          <p class="note" id="formNote"></p>
+        </form>
+      </div>
+      <div>
+        <div class="contact-info">
+          <div class="info-row">
+            <div class="ic">📞</div>
+            <div><div class="t">Phone</div><div class="v">+91 97491 63932</div></div>
+          </div>
+          <div class="info-row">
+            <div class="ic">✉️</div>
+            <div><div class="t">Email</div><div class="v">Soumanpatra5@gmail.com</div></div>
+          </div>
+          <div class="info-row">
+            <div class="ic">📍</div>
+            <div><div class="t">Farm location</div><div class="v">Andharia, Binpur, Jhargram,<br>West Bengal – 721504</div></div>
+          </div>
+          <a class="wa-btn" href="https://wa.me/919749163932?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20visit%20to%20the%20AgriOS%20farm." target="_blank" rel="noopener" style="background:var(--green);margin-bottom:10px">
+            <span style="font-size:18px">📅</span> Schedule a farm visit
+          </a>
+          <a class="wa-btn" href="https://wa.me/919749163932" target="_blank" rel="noopener">
+            <span style="font-size:19px">🟢</span> Chat on WhatsApp
+          </a>
+          <p class="note" style="text-align:center">We usually reply within a day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:8px">
+    <div class="wrap">
+      <div class="eyebrow">Find us</div>
+      <h2 style="margin-bottom:20px">Where the farm is</h2>
+      <div class="map-embed">
+        <iframe
+          src="https://maps.google.com/maps?q=Andharia%2C%20Binpur%2C%20Jhargram%2C%20West%20Bengal%20721504&t=&z=12&ie=UTF8&iwloc=&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="AgriOS Integrated Farm location — Andharia, Binpur, Jhargram"></iframe>
+      </div>
+      <div class="map-cap">
+        <span class="mi" style="font-size:18px">📍</span>
+        <span class="mc-addr">Andharia, Binpur, Jhargram, West Bengal – 721504</span>
+        <span>· On the main road, with access for heavy vehicles ·</span>
+        <a href="https://www.google.com/maps/search/?api=1&query=Andharia+Binpur+Jhargram+West+Bengal+721504" target="_blank" rel="noopener">Open in Google Maps →</a>
+      </div>
+      <p class="note" style="margin-top:8px;font-size:12.5px;color:var(--muted)">Map shows the area now; it will centre on the exact farm pin once coordinates are added.</p>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:56px">
+    <div class="wrap">
+      <div class="eyebrow">Common questions</div>
+      <h2 style="margin-bottom:24px">Frequently asked</h2>
+      <div class="faq-list">
+        <details class="faq">
+          <summary>Can I visit the farm?</summary>
+          <div class="faq-a">Yes — we welcome visits from buyers, partners and integrators. Use the "Schedule a farm visit" button above or message us on WhatsApp, and we'll arrange a convenient time.</div>
+        </details>
+        <details class="faq">
+          <summary>Do you supply outside Jhargram?</summary>
+          <div class="faq-a">Our farm is in Jhargram, West Bengal. For breeding stock, produce and feed, we can discuss supply to nearby districts depending on quantity and logistics — get in touch and we'll work it out.</div>
+        </details>
+        <details class="faq">
+          <summary>Is your feed available to other farmers?</summary>
+          <div class="faq-a">Yes. We manufacture our own feed on a proprietary in-house formula, and it's available to other farmers under our own brand. Contact us for the range, availability and pricing.</div>
+        </details>
+        <details class="faq">
+          <summary>When will your products be available to buy?</summary>
+          <div class="faq-a">Breeding stock (piglets, goat kids, ducklings, fingerlings) will be available fairly soon. Farm produce and farm-fresh goods follow as each unit matures. Leave your details and we'll notify you.</div>
+        </details>
+        <details class="faq">
+          <summary>Are you open to integrator or business partnerships?</summary>
+          <div class="faq-a">Absolutely. We run contract broiler poultry and are open to discussing partnerships across our enterprises. Reach out and we'll set up a conversation.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img class="footer-logo" src="logo-footer.png" alt="AgriOS Integrated Farms Pvt Ltd">
+        <p>A closed-loop integrated farm in Jhargram, West Bengal — raising poultry, livestock, fish and crops as one connected system.</p>
+        <p class="footer-tag">Smart Farming. Better Future.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a onclick="go('home')">Home</a></li>
+          <li><a onclick="go('about')">About</a></li>
+          <li><a onclick="go('what')">What we do</a></li>
+          <li><a onclick="go('products')">Products</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a onclick="go('contact')">Contact us</a></li>
+          <li><a href="https://wa.me/919749163932" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="mailto:Soumanpatra5@gmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 AgriOS Integrated Farm Pvt Ltd. All rights reserved.</span>
+      <span>Jhargram, West Bengal, India · <a href="admin.html" style="color:#7C7970">Admin</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function go(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.navlinks a[data-nav]').forEach(a=>{
+      a.classList.toggle('active', a.getAttribute('data-nav')===id);
+    });
+    document.getElementById('navlinks').classList.remove('open');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function toggleMenu(){
+    document.getElementById('navlinks').classList.toggle('open');
+  }
+  function submitForm(e){
+    e.preventDefault();
+    document.getElementById('formNote').textContent = "Thanks — this is a demo form. Once the site is live, messages will reach the farm directly.";
+    e.target.reset();
+  }
+
+  const CYCLE=[
+    {tag:"Livestock",title:"Poultry, pig, goat & duck",text:"Our animals are the engine of the farm. Beyond meat, eggs and income, they produce a steady supply of litter and manure — the raw material that powers everything else.",flow:["Manure & litter","Compost unit"]},
+    {tag:"Compost",title:"Vermicompost & organic manure",text:"Litter and manure are turned into rich vermicompost instead of being wasted. This becomes premium organic fertiliser — for our own land and for sale.",flow:["Organic compost","Crops & soil"]},
+    {tag:"Crops",title:"Fruit, vegetables & plantation",text:"Banana, papaya, guava and boundary crops grow on that compost — cutting fertiliser costs, improving soil year after year, and adding a fresh income stream.",flow:["Crop residue & shade","Ponds & fodder"]},
+    {tag:"Ponds",title:"Fish & duck aquaculture",text:"Four ponds run fish and duck together. Duck droppings and pond nutrients feed the fish, while nutrient-rich pond water and silt irrigate and enrich the crops.",flow:["Water & silt","Fodder & fields"]},
+    {tag:"Fodder",title:"Green fodder & feed",text:"Fodder grown on farm — watered by the ponds — feeds the livestock, closing the loop. Less bought-in feed, lower costs, and the cycle begins again.",flow:["Feed","Back to livestock"]}
+  ];
+  function setCycle(i){
+    const d=CYCLE[i];
+    document.getElementById('cpTag').textContent=d.tag;
+    document.getElementById('cpTitle').textContent=d.title;
+    document.getElementById('cpText').textContent=d.text;
+    let html="";
+    d.flow.forEach((f,idx)=>{html+='<span>'+f+'</span>'+(idx<d.flow.length-1?'<span class="arr">→</span>':'');});
+    document.getElementById('cpFlow').innerHTML=html;
+    document.querySelectorAll('.cnode circle').forEach((c,idx)=>{
+      c.setAttribute('stroke', idx===i ? '#fff' : 'none');
+      c.setAttribute('stroke-width', idx===i ? '3' : '0');
+    });
+  }
+</script>
+</body>
+</html>

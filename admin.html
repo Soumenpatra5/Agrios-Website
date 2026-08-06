@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgriOS Admin — Farm & Website Control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;--paper-2:#F3F1E9;--green:#3D6B4F;--green-d:#2F5540;--green-tint:#EDF1EA;
+    --clay:#CC785C;--clay-tint:#F7EDE8;--ink:#1A1A17;--muted:#5A574E;--line:#E4E0D5;
+    --radius:12px;--sidebar:236px;
+    --amber:#B8860B;--amber-tint:#FBF3E0;--red:#B4432E;--red-tint:#F8E9E4;--blue-tint:#E9F0F4;--blue:#3A6C84;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Hanken Grotesk',system-ui,sans-serif;background:var(--paper-2);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5}
+  button{font-family:inherit;cursor:pointer}
+  a{color:inherit;text-decoration:none}
+
+  .app{display:flex;min-height:100vh}
+
+  /* Sidebar */
+  .sidebar{width:var(--sidebar);background:var(--green-d);color:#DCE7DF;display:flex;flex-direction:column;position:fixed;top:0;bottom:0;left:0;padding:0;z-index:20}
+  .sb-brand{display:flex;align-items:center;gap:9px;padding:20px 20px;border-bottom:1px solid rgba(255,255,255,0.1)}
+  .sb-brand .logo{width:34px;height:34px;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff}
+  .sb-brand .logo img{width:100%;height:100%;object-fit:contain}
+  .sb-brand .bt{font-weight:600;color:#fff;font-size:15px}
+  .sb-brand .bs{font-size:10.5px;color:#9DBBA7}
+  .sb-section{padding:16px 14px 6px;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:#7EA089;font-weight:600}
+  .nav-item{display:flex;align-items:center;gap:11px;padding:10px 18px;font-size:14px;color:#CDE0D3;cursor:pointer;border-left:3px solid transparent;transition:all .15s}
+  .nav-item:hover{background:rgba(255,255,255,0.06);color:#fff}
+  .nav-item.active{background:rgba(255,255,255,0.1);color:#fff;border-left-color:var(--clay);font-weight:500}
+  .nav-item .i{font-size:16px;width:20px;text-align:center}
+  .sb-foot{margin-top:auto;padding:16px 18px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#9DBBA7}
+  .sb-user{display:flex;align-items:center;gap:10px}
+  .sb-user .av{width:32px;height:32px;border-radius:50%;background:var(--clay);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600}
+
+  /* Main */
+  .main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column;min-width:0}
+  .topbar{height:60px;background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:sticky;top:0;z-index:10}
+  .topbar h1{font-size:19px;font-weight:600}
+  .topbar .tb-right{display:flex;align-items:center;gap:14px}
+  .tb-btn{background:var(--green);color:#fff;padding:8px 15px;border-radius:9px;font-size:13.5px;font-weight:500;border:none}
+  .tb-btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+  .tb-badge{position:relative;font-size:19px}
+  .tb-badge .dot{position:absolute;top:-2px;right:-3px;width:8px;height:8px;background:var(--clay);border-radius:50%}
+
+  .content{padding:26px;flex:1}
+  .view{display:none;animation:fade .35s ease}
+  .view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* Cards / metrics */
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:22px}
+  .metric{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+  .metric .ml{font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:6px}
+  .metric .mv{font-size:28px;font-weight:600;margin-top:6px;letter-spacing:-0.02em}
+  .metric .mc{font-size:12px;margin-top:4px;font-weight:500}
+  .up{color:var(--green)} .down{color:var(--red)}
+
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:20px;overflow:hidden}
+  .panel-head{padding:15px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+  .panel-head h2{font-size:15px;font-weight:600}
+  .panel-head .ph-act{font-size:13px;color:var(--green);font-weight:500;cursor:pointer}
+  .panel-body{padding:20px}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:1000px){.two-col{grid-template-columns:1fr}}
+
+  /* Table */
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{text-align:left;padding:10px 14px;font-size:11.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);background:var(--paper-2)}
+  td{padding:11px 14px;border-bottom:1px solid var(--line)}
+  tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:var(--green-tint)}
+  .pill{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:20px}
+  .pill-green{background:var(--green-tint);color:var(--green-d)}
+  .pill-amber{background:var(--amber-tint);color:var(--amber)}
+  .pill-red{background:var(--red-tint);color:var(--red)}
+  .pill-blue{background:var(--blue-tint);color:var(--blue)}
+  .pill-clay{background:var(--clay-tint);color:var(--clay)}
+
+  /* progress */
+  .prog{height:8px;background:var(--paper-2);border-radius:6px;overflow:hidden;margin-top:8px}
+  .prog span{display:block;height:100%;background:var(--green);border-radius:6px}
+
+  /* batch cards */
+  .batch{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}
+  .batch:last-child{border-bottom:none}
+  .batch .bi{font-weight:600;font-size:14px}
+  .batch .bmeta{font-size:12.5px;color:var(--muted)}
+
+  /* list rows for website editing */
+  .edit-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border:1px solid var(--line);border-radius:10px;margin-bottom:10px;background:var(--paper)}
+  .edit-row .er-l{font-size:14px;font-weight:500}
+  .edit-row .er-s{font-size:12.5px;color:var(--muted)}
+  .mini-btn{font-size:12.5px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+  .mini-btn.green{background:var(--green);color:#fff;border-color:var(--green)}
+
+  .enq{padding:14px 16px;border:1px solid var(--line);border-radius:10px;margin-bottom:10px;background:var(--paper)}
+  .enq .eh{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+  .enq .en{font-weight:600;font-size:14px}
+  .enq .et{font-size:12px;color:var(--muted)}
+  .enq .em{font-size:13px;color:var(--muted);margin-top:4px}
+
+  .banner{background:var(--clay-tint);border:1px solid #E7C9BB;border-radius:10px;padding:11px 16px;font-size:13px;color:#8A4B36;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+
+  .field-lbl{font-size:12.5px;font-weight:500;margin-bottom:6px;display:block;color:var(--muted)}
+  .inp{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:13.5px;background:var(--paper);margin-bottom:14px}
+  .demo-note{font-size:12px;color:var(--muted);font-style:italic;margin-top:10px}
+
+  @media(max-width:760px){
+    .sidebar{transform:translateX(-100%);transition:transform .25s}
+    .sidebar.open{transform:none}
+    .main{margin-left:0}
+    .menu-toggle{display:inline-block!important}
+  }
+  .menu-toggle{display:none;background:none;border:none;font-size:22px;color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <span class="logo"><img src="favicon.png" alt="AgriOS"></span>
+      <div><div class="bt">AgriOS</div><div class="bs">Admin Console</div></div>
+    </div>
+
+    <div class="sb-section">Farm management</div>
+    <div class="nav-item active" data-view="dashboard" onclick="nav('dashboard')"><span class="i">▦</span> Dashboard</div>
+    <div class="nav-item" data-view="livestock" onclick="nav('livestock')"><span class="i">🐔</span> Livestock &amp; batches</div>
+    <div class="nav-item" data-view="production" onclick="nav('production')"><span class="i">📦</span> Production &amp; stock</div>
+    <div class="nav-item" data-view="finance" onclick="nav('finance')"><span class="i">₹</span> Finance</div>
+
+    <div class="sb-section">Website</div>
+    <div class="nav-item" data-view="content" onclick="nav('content')"><span class="i">✎</span> Content &amp; products</div>
+    <div class="nav-item" data-view="enquiries" onclick="nav('enquiries')"><span class="i">✉</span> Enquiries &amp; visits</div>
+
+    <div class="sb-section">System</div>
+    <div class="nav-item" data-view="settings" onclick="nav('settings')"><span class="i">⚙</span> Settings &amp; roles</div>
+
+    <div class="sb-foot">
+      <div class="sb-user"><span class="av">SP</span><div><div style="color:#fff;font-size:13px;font-weight:500">Soumen Patra</div><div>Owner</div></div></div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+        <h1 id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="tb-right">
+        <span class="tb-badge">🔔<span class="dot"></span></span>
+        <button class="tb-btn ghost" onclick="window.location.href='index.html'">View site ↗</button>
+        <button class="tb-btn">+ New entry</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="banner">⚡ This is a working demo with sample data. In the live version, every number here is real and updates as you run the farm.</div>
+
+      <!-- DASHBOARD -->
+      <div class="view active" id="dashboard">
+        <div class="metrics">
+          <div class="metric"><div class="ml">🐔 Active birds</div><div class="mv">4,850</div><div class="mc up">Batch B-14 · day 31 of 45</div></div>
+          <div class="metric"><div class="ml">₹ This month revenue</div><div class="mv">₹2.4L</div><div class="mc up">▲ 12% vs last month</div></div>
+          <div class="metric"><div class="ml">📦 Stock alerts</div><div class="mv">3</div><div class="mc down">2 feed · 1 medicine</div></div>
+          <div class="metric"><div class="ml">✉ New enquiries</div><div class="mv">5</div><div class="mc up">2 farm-visit requests</div></div>
+        </div>
+
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-head"><h2>Active batches</h2><span class="ph-act" onclick="nav('livestock')">View all →</span></div>
+            <div class="panel-body" style="padding-top:6px;padding-bottom:6px">
+              <div class="batch"><div><div class="bi">Broiler B-14</div><div class="bmeta">4,850 birds · Suguna contract</div></div><div style="text-align:right"><span class="pill pill-green">Healthy</span><div class="bmeta" style="margin-top:4px">Day 31/45</div></div></div>
+              <div class="batch"><div><div class="bi">Goat herd</div><div class="bmeta">11 does · 1 buck</div></div><div style="text-align:right"><span class="pill pill-green">Healthy</span><div class="bmeta" style="margin-top:4px">2 pregnant</div></div></div>
+              <div class="batch"><div><div class="bi">Fish · Pond 1+2</div><div class="bmeta">Rohu, Catla, Mrigal</div></div><div style="text-align:right"><span class="pill pill-amber">Monitor</span><div class="bmeta" style="margin-top:4px">O₂ low AM</div></div></div>
+              <div class="batch"><div><div class="bi">Ducks</div><div class="bmeta">100 birds · Khaki Campbell</div></div><div style="text-align:right"><span class="pill pill-green">Laying</span><div class="bmeta" style="margin-top:4px">~72 eggs/day</div></div></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><h2>Needs attention</h2><span class="ph-act">Clear all</span></div>
+            <div class="panel-body">
+              <div class="edit-row"><div><div class="er-l">Broiler feed running low</div><div class="er-s">3 days of stock left · reorder from Suguna</div></div><span class="pill pill-red">Urgent</span></div>
+              <div class="edit-row"><div><div class="er-l">Vaccination due — B-14</div><div class="er-s">IBD booster on day 33</div></div><span class="pill pill-amber">2 days</span></div>
+              <div class="edit-row"><div><div class="er-l">Farm-visit request</div><div class="er-s">From a poultry integrator · Aug 9</div></div><span class="pill pill-blue">Reply</span></div>
+              <div class="edit-row" style="margin-bottom:0"><div><div class="er-l">Papaya harvest window</div><div class="er-s">Block C ready in ~5 days</div></div><span class="pill pill-green">Plan</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIVESTOCK -->
+      <div class="view" id="livestock">
+        <div class="panel">
+          <div class="panel-head"><h2>Livestock &amp; batches</h2><span class="ph-act">+ Add batch</span></div>
+          <div class="panel-body" style="padding:0">
+            <table>
+              <thead><tr><th>Unit</th><th>Stock</th><th>Stage / age</th><th>Status</th><th>Notes</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Broiler B-14</strong></td><td>4,850 birds</td><td>Day 31 / 45</td><td><span class="pill pill-green">Healthy</span></td><td>Suguna contract · FCR on track</td></tr>
+                <tr><td><strong>Pig unit</strong></td><td>—</td><td>Planned Yr-2</td><td><span class="pill pill-blue">Upcoming</span></td><td>Breeding herd from Year 2</td></tr>
+                <tr><td><strong>Goat herd</strong></td><td>11 does, 1 buck</td><td>Mixed</td><td><span class="pill pill-green">Healthy</span></td><td>2 pregnant · dewormed Jul</td></tr>
+                <tr><td><strong>Ducks</strong></td><td>100 birds</td><td>Laying</td><td><span class="pill pill-green">Laying</span></td><td>~72 eggs/day</td></tr>
+                <tr><td><strong>Fish · Pond 1</strong></td><td>Composite</td><td>4 months</td><td><span class="pill pill-green">Healthy</span></td><td>Rohu, Catla, Mrigal</td></tr>
+                <tr><td><strong>Fish · Pond 2</strong></td><td>Composite</td><td>4 months</td><td><span class="pill pill-amber">Monitor</span></td><td>Low morning O₂ · aerator on</td></tr>
+                <tr><td><strong>Bees</strong></td><td>5 hives</td><td>Active</td><td><span class="pill pill-green">Active</span></td><td>First honey pull due Sep</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCTION -->
+      <div class="view" id="production">
+        <div class="metrics">
+          <div class="metric"><div class="ml">🥚 Eggs (this week)</div><div class="mv">504</div><div class="mc up">duck · for market</div></div>
+          <div class="metric"><div class="ml">🌿 Vermicompost</div><div class="mv">1.2 t</div><div class="mc up">ready to bag</div></div>
+          <div class="metric"><div class="ml">🍌 Banana</div><div class="mv">Block A</div><div class="mc">harvest in 3 wks</div></div>
+          <div class="metric"><div class="ml">📦 Feed stock</div><div class="mv">3 days</div><div class="mc down">reorder now</div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2>Stock &amp; inputs</h2><span class="ph-act">+ Record movement</span></div>
+          <div class="panel-body" style="padding:0">
+            <table>
+              <thead><tr><th>Item</th><th>On hand</th><th>Buffer</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Broiler feed</strong></td><td>18 bags</td><td>40 bags</td><td><span class="pill pill-red">Order now</span></td></tr>
+                <tr><td><strong>Vaccines / medicine</strong></td><td>Low</td><td>—</td><td><span class="pill pill-amber">Plan order</span></td></tr>
+                <tr><td><strong>Fish feed</strong></td><td>6 sacks</td><td>4 sacks</td><td><span class="pill pill-green">OK</span></td></tr>
+                <tr><td><strong>Rice husk (litter)</strong></td><td>Sufficient</td><td>—</td><td><span class="pill pill-green">OK</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINANCE -->
+      <div class="view" id="finance">
+        <div class="metrics">
+          <div class="metric"><div class="ml">Revenue (month)</div><div class="mv">₹2.4L</div><div class="mc up">▲ 12%</div></div>
+          <div class="metric"><div class="ml">Expenses (month)</div><div class="mv">₹1.7L</div><div class="mc">feed, labour, vet</div></div>
+          <div class="metric"><div class="ml">Net (month)</div><div class="mv up">₹70K</div><div class="mc up">positive</div></div>
+          <div class="metric"><div class="ml">Loan EMI</div><div class="mv">On track</div><div class="mc">next: Aug 15</div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2>Recent transactions</h2><span class="ph-act">Export</span></div>
+          <div class="panel-body" style="padding:0">
+            <table>
+              <thead><tr><th>Date</th><th>Description</th><th>Type</th><th style="text-align:right">Amount</th></tr></thead>
+              <tbody>
+                <tr><td>05 Aug</td><td>Duck eggs — local market</td><td><span class="pill pill-green">Income</span></td><td style="text-align:right;color:var(--green);font-weight:600">+₹3,600</td></tr>
+                <tr><td>04 Aug</td><td>Broiler feed — 20 bags</td><td><span class="pill pill-red">Expense</span></td><td style="text-align:right;color:var(--red);font-weight:600">−₹28,000</td></tr>
+                <tr><td>02 Aug</td><td>Goat sale — 2 males</td><td><span class="pill pill-green">Income</span></td><td style="text-align:right;color:var(--green);font-weight:600">+₹18,500</td></tr>
+                <tr><td>01 Aug</td><td>Labour wages</td><td><span class="pill pill-red">Expense</span></td><td style="text-align:right;color:var(--red);font-weight:600">−₹35,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENT / WEBSITE -->
+      <div class="view" id="content">
+        <div class="panel">
+          <div class="panel-head"><h2>Website content</h2><span class="ph-act">Publish changes</span></div>
+          <div class="panel-body">
+            <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Edit what appears on the public site — no developer needed.</p>
+            <div class="edit-row"><div><div class="er-l">Hero headline</div><div class="er-s">"Farming, integrated the way nature intended."</div></div><button class="mini-btn">Edit</button></div>
+            <div class="edit-row"><div><div class="er-l">Impact numbers</div><div class="er-s">16 bigha · 5,000 birds · 8 enterprises · 4 ponds</div></div><button class="mini-btn">Edit</button></div>
+            <div class="edit-row"><div><div class="er-l">Founder's note</div><div class="er-s">Soumen Patra's quote</div></div><button class="mini-btn">Edit</button></div>
+            <div class="edit-row"><div><div class="er-l">Vision &amp; mission</div><div class="er-s">On the About page</div></div><button class="mini-btn">Edit</button></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2>Products</h2><span class="ph-act">+ Add product</span></div>
+          <div class="panel-body">
+            <div class="edit-row"><div><div class="er-l">🌾 AgriOS feed (own brand)</div><div class="er-s">Proprietary formula · major line · formula hidden on site</div></div><div style="display:flex;gap:8px"><button class="mini-btn">Edit</button><button class="mini-btn green">Go live</button></div></div>
+            <div class="edit-row"><div><div class="er-l">🐷 Breeding stock (piglets, kids, ducklings, fingerlings)</div><div class="er-s">Status: Available fairly soon</div></div><div style="display:flex;gap:8px"><button class="mini-btn">Edit</button><button class="mini-btn green">Go live</button></div></div>
+            <div class="edit-row"><div><div class="er-l">🍌 Farm produce (banana, papaya, black pepper)</div><div class="er-s">Status: Coming soon</div></div><div style="display:flex;gap:8px"><button class="mini-btn">Edit</button><button class="mini-btn green">Go live</button></div></div>
+            <div class="edit-row"><div><div class="er-l">🍯 Farm-fresh (honey, eggs, meat)</div><div class="er-s">Status: Coming soon</div></div><div style="display:flex;gap:8px"><button class="mini-btn">Edit</button><button class="mini-btn green">Go live</button></div></div>
+            <div class="edit-row" style="margin-bottom:0"><div><div class="er-l">🌱 Cocopeat unit</div><div class="er-s">Status: Planned · Year 5</div></div><div style="display:flex;gap:8px"><button class="mini-btn">Edit</button><span class="pill pill-blue">Year 5</span></div></div>
+            <p class="demo-note">When you tap "Go live", the product moves from "Coming soon" to a real listing on the public site. The feed formula stays confidential — only the brand and product show publicly.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENQUIRIES -->
+      <div class="view" id="enquiries">
+        <div class="panel">
+          <div class="panel-head"><h2>Enquiries &amp; farm-visit requests</h2><span class="ph-act">Mark all read</span></div>
+          <div class="panel-body">
+            <div class="enq"><div class="eh"><span class="en">Rajesh Kumar</span><span class="pill pill-clay">Farm visit</span></div><div class="et">rajesh@… · +91 98xxx · Aug 9, 11 AM</div><div class="em">"We run a poultry integration business and would like to visit and discuss a contract."</div></div>
+            <div class="enq"><div class="eh"><span class="en">Anita Sen</span><span class="pill pill-green">Product</span></div><div class="et">anita@… · Aug 5</div><div class="em">"Interested in buying farm eggs and honey when available. Please notify me."</div></div>
+            <div class="enq" style="margin-bottom:0"><div class="eh"><span class="en">District Bank — Agri Desk</span><span class="pill pill-blue">Partner</span></div><div class="et">agri@… · Aug 3</div><div class="em">"Following up on the loan file. Could we schedule a site inspection?"</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="view" id="settings">
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-head"><h2>Team &amp; roles</h2><span class="ph-act">+ Invite</span></div>
+            <div class="panel-body" style="padding:0">
+              <table>
+                <thead><tr><th>Member</th><th>Role</th><th>Access</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Soumen Patra</strong></td><td><span class="pill pill-green">Owner</span></td><td>Everything</td></tr>
+                  <tr><td>Farm supervisor</td><td><span class="pill pill-blue">Manager</span></td><td>Farm units, stock</td></tr>
+                  <tr><td>Field worker</td><td><span class="pill pill-amber">Member</span></td><td>Daily entries only</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2>Farm profile</h2></div>
+            <div class="panel-body">
+              <label class="field-lbl">Company name</label>
+              <input class="inp" value="AgriOS Integrated Farm Pvt Ltd">
+              <label class="field-lbl">Location</label>
+              <input class="inp" value="Andharia, Binpur, Jhargram, WB">
+              <label class="field-lbl">WhatsApp number</label>
+              <input class="inp" value="+91 97491 63932">
+              <button class="tb-btn" style="width:100%">Save profile</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const TITLES={dashboard:'Dashboard',livestock:'Livestock & batches',production:'Production & stock',finance:'Finance',content:'Content & products',enquiries:'Enquiries & visits',settings:'Settings & roles'};
+  function nav(v){
+    document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+    document.getElementById(v).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.view===v));
+    document.getElementById('pageTitle').textContent=TITLES[v];
+    document.getElementById('sidebar').classList.remove('open');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+</script>
+</body>
+</html>
