@@ -13,10 +13,8 @@ npm-debug.log*
 
 # Vercel
 .vercel/
+.env*
 
 # Local/session files
 .claude/
 *.log
-
-.vercel
-.env*
