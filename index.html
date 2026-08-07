@@ -232,11 +232,12 @@
   .cycle-wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-top:14px}
   .cycle-stage{position:relative;width:100%;max-width:420px;aspect-ratio:1;margin:0 auto}
   .cycle-svg{width:100%;height:100%;overflow:visible}
-  .cnode{cursor:pointer;transition:transform .2s}
-  .cnode circle{transition:all .2s}
+  .cnode{cursor:pointer}
+  .cnode circle{transition:stroke .2s, stroke-width .2s}
   .cnode text{font-family:'Hanken Grotesk',sans-serif;font-size:13px;font-weight:600;fill:#fff;pointer-events:none}
   .cnode .cn-emoji{font-size:19px}
-  .cnode:hover{transform:scale(1.06)}
+  /* hover highlights the ring only — never moves the node's position */
+  .cnode:hover circle{stroke:rgba(255,255,255,0.75);stroke-width:2}
   .cycle-center{font-family:'Hanken Grotesk',sans-serif}
   .cycle-panel{min-height:200px}
   .cycle-panel .cp-tag{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;font-weight:600;color:#86EFAC;margin-bottom:10px;display:block}
@@ -694,32 +695,32 @@
       <div class="cycle-wrap">
         <div class="cycle-stage">
           <svg class="cycle-svg" viewBox="0 0 320 320" role="img" aria-label="Interactive AgriOS integrated farm cycle">
-            <circle cx="160" cy="160" r="96" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-dasharray="4 6"/>
+            <circle cx="160" cy="160" r="104" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-dasharray="4 6"/>
             <g class="cycle-center" text-anchor="middle">
               <text x="160" y="152" style="font-size:15px;font-weight:600;fill:#fff">AgriOS</text>
               <text x="160" y="172" style="font-size:12px;fill:#BFD6C7">Cycle</text>
             </g>
-            <g class="cnode" data-node="0" onclick="setCycle(0)" transform="translate(160,44)">
+            <g class="cnode" data-node="0" onclick="setCycle(0)" transform="translate(160,56)">
               <circle r="30" fill="#16A34A"/>
               <text class="cn-emoji" text-anchor="middle" y="-2">🐔</text>
               <text text-anchor="middle" y="16">Livestock</text>
             </g>
-            <g class="cnode" data-node="1" onclick="setCycle(1)" transform="translate(258,132)">
+            <g class="cnode" data-node="1" onclick="setCycle(1)" transform="translate(259,128)">
               <circle r="30" fill="#2E7D4E"/>
               <text class="cn-emoji" text-anchor="middle" y="-2">🌿</text>
               <text text-anchor="middle" y="16">Compost</text>
             </g>
-            <g class="cnode" data-node="2" onclick="setCycle(2)" transform="translate(220,250)">
+            <g class="cnode" data-node="2" onclick="setCycle(2)" transform="translate(221,244)">
               <circle r="30" fill="#2E7D4E"/>
               <text class="cn-emoji" text-anchor="middle" y="-2">🍌</text>
               <text text-anchor="middle" y="16">Crops</text>
             </g>
-            <g class="cnode" data-node="3" onclick="setCycle(3)" transform="translate(100,250)">
+            <g class="cnode" data-node="3" onclick="setCycle(3)" transform="translate(99,244)">
               <circle r="30" fill="#2E7D4E"/>
               <text class="cn-emoji" text-anchor="middle" y="-2">🐟</text>
               <text text-anchor="middle" y="16">Ponds</text>
             </g>
-            <g class="cnode" data-node="4" onclick="setCycle(4)" transform="translate(62,132)">
+            <g class="cnode" data-node="4" onclick="setCycle(4)" transform="translate(61,128)">
               <circle r="30" fill="#16A34A"/>
               <text class="cn-emoji" text-anchor="middle" y="-2">🌾</text>
               <text text-anchor="middle" y="16">Fodder</text>
@@ -1198,6 +1199,32 @@
       c.setAttribute('stroke-width', idx===i ? '3' : '0');
     });
   }
+
+  // ---------- AgriOS Cycle: nodes stay fixed on the ring; the whole wheel orbits ----------
+  // No cursor repulsion/scatter. Only each node's position (translate) is updated so the
+  // five nodes rotate together as one wheel while their icons/labels stay upright.
+  (function cycleOrbit(){
+    const nodes=[...document.querySelectorAll('.cnode')];
+    if(!nodes.length) return;
+    const CX=160, CY=160, R=104, N=nodes.length;
+    const base=nodes.map((n,i)=>(-90 + i*(360/N))*Math.PI/180); // even 72° spacing, Livestock at top
+    const place=rot=>{
+      for(let i=0;i<N;i++){
+        const a=base[i]+rot;
+        nodes[i].setAttribute('transform',
+          'translate('+(CX+R*Math.cos(a)).toFixed(2)+','+(CY+R*Math.sin(a)).toFixed(2)+')');
+      }
+    };
+    place(0);
+    // Respect reduced-motion: keep the wheel perfectly still.
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const page=nodes[0].closest('.page'), MS_PER_TURN=44000; // one slow, continuous, linear turn
+    function frame(ts){
+      if(!page || page.classList.contains('active')) place((ts % MS_PER_TURN)/MS_PER_TURN * Math.PI*2);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  })();
 </script>
 </body>
 </html>
