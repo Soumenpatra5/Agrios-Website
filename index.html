@@ -1218,9 +1218,18 @@
     place(0);
     // Respect reduced-motion: keep the wheel perfectly still.
     if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const page=nodes[0].closest('.page'), MS_PER_TURN=44000; // one slow, continuous, linear turn
+    const page=nodes[0].closest('.page');
+    const SPEED=(Math.PI*2)/44000; // radians per ms → one slow, continuous, linear turn (~44s)
+    let paused=false, rot=0, last=null;
+    // Pause the rotation while the cursor hovers a node (freezes it under the cursor). Ignore touch taps.
+    nodes.forEach(n=>{
+      n.addEventListener('pointerenter',e=>{ if(e.pointerType!=='touch') paused=true; });
+      n.addEventListener('pointerleave',e=>{ if(e.pointerType!=='touch') paused=false; });
+    });
     function frame(ts){
-      if(!page || page.classList.contains('active')) place((ts % MS_PER_TURN)/MS_PER_TURN * Math.PI*2);
+      if(last==null) last=ts;
+      const dt=ts-last; last=ts;
+      if(!paused && (!page || page.classList.contains('active'))){ rot+=dt*SPEED; place(rot); }
       requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
