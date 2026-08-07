@@ -107,7 +107,9 @@
   .navlinks a:not(.nav-cta){position:relative;font-size:14.5px;color:rgba(255,255,255,0.74);font-weight:500;letter-spacing:0.2px;transition:color .18s;cursor:pointer;padding:6px 0}
   .navlinks a:not(.nav-cta):hover{color:#fff}
   .navlinks a.active:not(.nav-cta){color:#fff}
-  .navlinks a.active:not(.nav-cta)::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:#4ADE80;border-radius:2px}
+  .navlinks a:not(.nav-cta)::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:#4ADE80;border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .2s cubic-bezier(.2,.6,.2,1)}
+  .navlinks a:not(.nav-cta):hover::after,
+  .navlinks a.active:not(.nav-cta)::after{transform:scaleX(1)}
   .nav-cta{
     background:linear-gradient(135deg,#22C55E,#16A34A);color:#fff!important;padding:9px 20px;border-radius:10px;
     font-size:14px;font-weight:600;letter-spacing:.2px;
