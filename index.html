@@ -183,6 +183,27 @@
   .vm-mission p{color:var(--ink)}
   @media(max-width:860px){.vm-grid{grid-template-columns:1fr}}
 
+  /* ---------- Card view: every content section is its own card ---------- */
+  body{background:#ECF1ED}
+  main.page{padding:26px 22px 46px}
+  main.page > section{padding:12px 0 !important}
+  main.page > section > .wrap{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 4px 20px rgba(20,83,45,0.07);
+    padding:46px 48px;
+  }
+  /* full-width bands become coloured cards instead of edge-to-edge strips */
+  main.page > section.band,
+  main.page > section.band-green{background:transparent !important}
+  main.page > section.band-green > .wrap{background:var(--green);border-color:var(--green)}
+  @media(max-width:860px){
+    main.page{padding:16px 14px 32px}
+    main.page > section{padding:9px 0 !important}
+    main.page > section > .wrap{padding:30px 24px}
+  }
+
   /* ---------- Interactive AgriOS Cycle ---------- */
   .cycle-wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-top:14px}
   .cycle-stage{position:relative;width:100%;max-width:420px;aspect-ratio:1;margin:0 auto}
