@@ -117,6 +117,26 @@
   }
   .nav-cta:hover{filter:brightness(1.07)}
   .menu-btn{display:none;background:none;border:none;cursor:pointer;font-size:26px;color:#fff}
+  .nav-search{background:none;border:none;color:rgba(255,255,255,0.82);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:6px;border-radius:8px;transition:color .18s,background .18s}
+  .nav-search:hover{color:#fff;background:rgba(255,255,255,0.10)}
+
+  /* ---------- Site search overlay ---------- */
+  .search-overlay{position:fixed;inset:0;background:rgba(10,25,15,0.45);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);z-index:60;display:none;justify-content:center;padding:84px 16px 24px}
+  .search-overlay.open{display:flex}
+  .search-box{width:min(560px,100%);align-self:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 24px 64px rgba(15,31,22,0.28);display:flex;flex-direction:column;max-height:calc(100vh - 120px);overflow:hidden}
+  .search-inputwrap{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+  .search-ic{color:var(--muted);flex-shrink:0}
+  #searchInput{flex:1;border:none;outline:none;background:none;font-family:inherit;font-size:16px;color:var(--ink)}
+  .search-close{background:none;border:none;font-size:15px;color:var(--muted);cursor:pointer;padding:4px 7px;border-radius:6px;line-height:1}
+  .search-close:hover{background:var(--paper-2);color:var(--ink)}
+  .search-results{overflow-y:auto;padding:6px}
+  .search-result{display:block;width:100%;text-align:left;background:none;border:none;padding:10px 12px;border-radius:9px;cursor:pointer;transition:background .12s}
+  .search-result:hover,.search-result.sel{background:var(--green-tint)}
+  .search-result .sr-p{font-size:11px;color:var(--green);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+  .search-result .sr-t{font-size:14.5px;font-weight:600;color:var(--ink);margin-top:1px}
+  .search-result .sr-s{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4}
+  .search-box mark{background:var(--clay-tint);color:inherit;padding:0 1px;border-radius:2px}
+  .search-empty{padding:20px 14px;color:var(--muted);font-size:14px;text-align:center}
 
   /* ---------- Pages ---------- */
   .page{display:none;animation:fade .4s ease}
@@ -405,11 +425,24 @@
       <a data-nav="about" onclick="go('about')">About</a>
       <a data-nav="what" onclick="go('what')">What we do</a>
       <a data-nav="products" onclick="go('products')">Products</a>
+      <button class="nav-search" onclick="openSearch()" aria-label="Search the site"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="20.5" y1="20.5" x2="16.5" y2="16.5"/></svg></button>
       <a class="nav-cta" onclick="go('contact')">Contact</a>
     </nav>
     <button class="menu-btn" aria-label="Menu" onclick="toggleMenu()">☰</button>
   </div>
 </header>
+
+<!-- Site search (client-side, no backend) -->
+<div class="search-overlay" id="searchOverlay" aria-hidden="true" onclick="if(event.target===this)closeSearch()">
+  <div class="search-box" role="dialog" aria-label="Search the site">
+    <div class="search-inputwrap">
+      <svg class="search-ic" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="20.5" y1="20.5" x2="16.5" y2="16.5"/></svg>
+      <input type="text" id="searchInput" placeholder="Search the site…" autocomplete="off" oninput="renderResults(this.value)" onkeydown="searchKey(event)">
+      <button class="search-close" onclick="closeSearch()" aria-label="Close search">✕</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
 
 <!-- ============ HOME ============ -->
 <main id="home" class="page active">
@@ -1009,17 +1042,99 @@
 </footer>
 
 <script>
-  function go(id){
+  function go(id, noScroll){
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     document.querySelectorAll('.navlinks a[data-nav]').forEach(a=>{
       a.classList.toggle('active', a.getAttribute('data-nav')===id);
     });
     document.getElementById('navlinks').classList.remove('open');
-    window.scrollTo({top:0,behavior:'smooth'});
+    if(!noScroll) window.scrollTo({top:0,behavior:'smooth'});
   }
   function toggleMenu(){
     document.getElementById('navlinks').classList.toggle('open');
+  }
+
+  // ---------- Site search (client-side, indexes all 5 pages) ----------
+  let SEARCH_IDX=null, SEARCH_SEL=0;
+  const PAGE_LABEL={home:'Home',about:'About',what:'What we do',products:'Products',contact:'Contact'};
+  function buildSearchIndex(){
+    const idx=[];
+    document.querySelectorAll('main.page').forEach(page=>{
+      page.querySelectorAll('h1,h2,h3,summary').forEach(h=>{
+        const title=h.textContent.trim();
+        if(!title) return;
+        const block=h.closest('.card,.prod,.cert,.enq,.loop-step,.founder,.feed-left,.cycle-panel,.vm-card,.faq,.contact-info')||h.closest('.wrap')||h.closest('section')||h.parentElement;
+        const text=(block?block.textContent:title).replace(/\s+/g,' ').trim();
+        idx.push({page:page.id,title,text,el:h});
+      });
+    });
+    return idx;
+  }
+  function openSearch(){
+    if(!SEARCH_IDX) SEARCH_IDX=buildSearchIndex();
+    const ov=document.getElementById('searchOverlay');
+    ov.classList.add('open'); ov.setAttribute('aria-hidden','false');
+    document.getElementById('navlinks').classList.remove('open');
+    const inp=document.getElementById('searchInput');
+    inp.value=''; SEARCH_SEL=0; renderResults('');
+    setTimeout(()=>inp.focus(),30);
+  }
+  function closeSearch(){
+    const ov=document.getElementById('searchOverlay');
+    ov.classList.remove('open'); ov.setAttribute('aria-hidden','true');
+  }
+  function escHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  function hl(s,q){const e=escHtml(s);const i=e.toLowerCase().indexOf(q.toLowerCase());if(i<0)return e;return e.slice(0,i)+'<mark>'+e.slice(i,i+q.length)+'</mark>'+e.slice(i+q.length);}
+  function snippet(text,q){
+    const i=text.toLowerCase().indexOf(q.toLowerCase());
+    if(i<0) return '';
+    const a=Math.max(0,i-32), b=Math.min(text.length,i+q.length+60);
+    return hl((a>0?'…':'')+text.slice(a,b)+(b<text.length?'…':''), q);
+  }
+  function renderResults(q){
+    const box=document.getElementById('searchResults');
+    q=(q||'').trim();
+    if(!q){box.innerHTML='<div class="search-empty">Type to search across the whole site…</div>';return;}
+    const ql=q.toLowerCase();
+    const res=SEARCH_IDX.map((it,idx)=>{
+      const t=it.title.toLowerCase(), x=it.text.toLowerCase();
+      let s=0; if(t.includes(ql))s+=10; if(t.startsWith(ql))s+=5; if(x.includes(ql))s+=3;
+      return {it,idx,s};
+    }).filter(r=>r.s>0).sort((a,b)=>b.s-a.s).slice(0,8);
+    SEARCH_SEL=0;
+    if(!res.length){box.innerHTML='<div class="search-empty">No matches for “'+escHtml(q)+'”.</div>';return;}
+    box.innerHTML=res.map((r,i)=>{
+      const sn=snippet(r.it.text,q);
+      return '<button class="search-result'+(i===0?' sel':'')+'" onclick="gotoResult('+r.idx+')">'+
+        '<div class="sr-p">'+PAGE_LABEL[r.it.page]+'</div>'+
+        '<div class="sr-t">'+hl(r.it.title,q)+'</div>'+
+        (sn?'<div class="sr-s">'+sn+'</div>':'')+
+      '</button>';
+    }).join('');
+  }
+  function gotoResult(idx){
+    const it=SEARCH_IDX[idx]; closeSearch(); if(!it) return; go(it.page, true);
+    setTimeout(()=>{
+      if(!it.el) return;
+      it.el.scrollIntoView({behavior:'smooth',block:'center'});
+      const card=it.el.closest('.wrap')||it.el.closest('section')||it.el;
+      const prev=card.style.boxShadow;
+      card.style.transition='box-shadow .25s';
+      card.style.boxShadow='0 0 0 3px rgba(22,163,74,.55)';
+      setTimeout(()=>{card.style.boxShadow=prev;},1300);
+    },430);
+  }
+  function searchKey(e){
+    if(e.key==='Escape'){closeSearch();return;}
+    const items=[...document.querySelectorAll('#searchResults .search-result')];
+    if(!items.length) return;
+    if(e.key==='ArrowDown'){e.preventDefault();SEARCH_SEL=Math.min(items.length-1,SEARCH_SEL+1);}
+    else if(e.key==='ArrowUp'){e.preventDefault();SEARCH_SEL=Math.max(0,SEARCH_SEL-1);}
+    else if(e.key==='Enter'){e.preventDefault();items[SEARCH_SEL]&&items[SEARCH_SEL].click();return;}
+    else return;
+    items.forEach((it,i)=>it.classList.toggle('sel',i===SEARCH_SEL));
+    items[SEARCH_SEL].scrollIntoView({block:'nearest'});
   }
   // Contact form — posts to FormSubmit (no backend needed). Messages are
   // forwarded by email to the address below once it is activated (the owner
