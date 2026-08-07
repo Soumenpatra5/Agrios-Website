@@ -1219,7 +1219,7 @@
     // Respect reduced-motion: keep the wheel perfectly still.
     if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const page=nodes[0].closest('.page');
-    const SPEED=(Math.PI*2)/44000; // radians per ms → one slow, continuous, linear turn (~44s)
+    const SPEED=(Math.PI*2)/60000; // radians per ms → one slow, continuous, linear turn (~60s)
     let paused=false, rot=0, last=null;
     // Pause the rotation while the cursor hovers a node (freezes it under the cursor). Ignore touch taps.
     nodes.forEach(n=>{
