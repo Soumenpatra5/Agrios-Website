@@ -2,7 +2,8 @@
 
 **The authoritative specification for the company website**
 Design · Content · Structure · Build · Roadmap
-Version 1.3 · 2026 · Prepared with the same discipline as the Ascendo build specs
+Version 1.4 · 2026 · Prepared with the same discipline as the Ascendo build specs
+_(v1.4, 2026-08-07: retheme to deep-green + bright-green on white, and a card-view layout — see §2, §3.)_
 
 ---
 
@@ -69,10 +70,10 @@ Every foundational decision, settled during the specification interview. Fixed u
 | 2 | Primary purpose | Mixed — credibility + future sales + info presence |
 | 3 | Site structure | Multi-page: Home, About, What We Do, Products, Contact |
 | 4 | Visual language | Ascendo design, farm-tuned |
-| 5 | Primary colour | Farm green — `#3D6B4F` |
-| 6 | Accent colour | Terracotta — `#CC785C` (Ascendo signature) |
-| 7 | Background | Warm paper — `#FAF9F5` |
-| 8 | Text colour | Warm near-black — `#1A1A17` |
+| 5 | Primary colour | Deep forest green — `#14532D` |
+| 6 | Accent colour | Bright green — `#16A34A` |
+| 7 | Background | Crisp white — `#FFFFFF` |
+| 8 | Text colour | Near-black green — `#0F1F16` |
 | 9 | Typeface | Hanken Grotesk |
 | 10 | Content source | From the DPR; more added over time |
 | 11 | Contact method | Form + phone + email + address + WhatsApp button |
@@ -82,7 +83,7 @@ Every foundational decision, settled during the specification interview. Fixed u
 
 ## 3. Brand & design system
 
-The design language is inherited from Ascendo and tuned for a farm brand: the same calm minimalism and warm paper, but with a farm-green primary so it reads instantly as agriculture, and terracotta kept as the connective accent that ties the website to the Ascendo family and the DPR paperwork.
+The design language is inherited from Ascendo and tuned for a farm brand: the same calm minimalism, but rendered on crisp white with a deep forest-green primary so it reads instantly as agriculture, and a bright green as the single accent. _(This originally used a farm-green primary with a terracotta accent on warm paper; the owner rethemed it to green-on-white with a card-view layout on 2026-08-07 — the tokens and rules below reflect the current build.)_
 
 > **Logo & tagline.** A full logo kit was supplied (primary, secondary, icon, black & white, transparent). Used across the site: the clean AgriOS wordmark (from the primary) in the header, the full logo with tagline in the footer, the icon as favicon and in the admin sidebar. Black & white kept on file for print. Official tagline: **"Smart Farming. Better Future."**
 
@@ -90,18 +91,21 @@ The design language is inherited from Ascendo and tuned for a farm brand: the sa
 
 | Token | Hex | Role |
 |---|---|---|
-| Paper | `#FAF9F5` | Page background |
-| Paper 2 | `#F3F1E9` | Alternate section band |
-| Green (primary) | `#3D6B4F` | Brand colour — primary buttons, logo, links |
-| Green dark | `#2F5540` | Button hover, dark green bands |
-| Green tint | `#EDF1EA` | Soft green cards / stat cards |
-| Clay (accent) | `#CC785C` | Terracotta accent — secondary buttons, highlights |
-| Clay tint | `#F7EDE8` | Soft terracotta cards |
-| Ink | `#1A1A17` | Primary text |
-| Muted | `#5A574E` | Secondary text |
-| Line | `#E4E0D5` | Borders / hairlines |
+| Paper | `#FFFFFF` | Card / surface background |
+| Paper 2 | `#F4F8F5` | Alternate section band |
+| Canvas | `#ECF1ED` | Card-view page background behind the cards |
+| Green (primary) | `#14532D` | Brand colour — primary buttons, logo, links, dark bands |
+| Green dark | `#0E3D20` | Button hover, admin sidebar, darkest green |
+| Green tint | `#E6F0E9` | Soft green cards / stat cards |
+| Bright green (accent) | `#16A34A` | Accent — secondary buttons, highlights, admin "go live" |
+| Accent tint | `#DCFCE7` | Soft accent cards / pills |
+| Ink | `#0F1F16` | Primary text |
+| Muted | `#4E5B54` | Secondary text |
+| Line | `#E4EAE5` | Borders / hairlines |
 
-> **One accent rule.** Green is the brand. Terracotta is the single accent, used sparingly — secondary buttons, one stat card, a highlight. Never let terracotta compete with green for dominance; that restraint is what keeps it feeling like Ascendo.
+> **One accent rule.** Deep forest green is the brand. Bright green (`#16A34A`) is the single accent, used sparingly — secondary buttons, one stat card, a highlight, the admin "go live". Keep the deep-green primary dominant; the accent is a highlight, never a co-lead.
+
+> **Card view.** Every content section sits in its own white card (1px `#E4EAE5` border, 14px radius, soft shadow) on the `#ECF1ED` canvas, with a consistent gutter and full-width bands rendered as rounded coloured cards. Applied across the public site and the admin console (added 2026-08-07).
 
 ### 3.2 Typography
 
@@ -252,7 +256,7 @@ Reusable building blocks. Building any new page means composing these, not inven
 |---|---|
 | Header / nav | Sticky, translucent, logo + links + green Contact button; hamburger on mobile |
 | Eyebrow label | Small uppercase green label above headings |
-| Stat card | Rounded card, big number + small label; green or clay variant |
+| Stat card | Rounded card, big number + small label; green or bright-green variant |
 | Enterprise card | White card, icon tile, title, description; hover lift |
 | Loop step | Numbered step in the integrated-model row |
 | Interactive AgriOS Cycle | Circular 5-node SVG diagram with a click-updated side panel (the signature element) |
@@ -267,11 +271,11 @@ Reusable building blocks. Building any new page means composing these, not inven
 | FAQ accordion | Expandable question/answer rows (native details/summary) |
 | Coloured band | Full-width section in paper-2, green, or green-tint |
 | Product card | Image top, status pill (Coming soon / Available soon / Year 5), title, description |
-| Feature list | Checklist with terracotta bullets |
+| Feature list | Checklist with bright-green bullets |
 | Contact form | Labelled fields with green focus ring |
 | Info panel | Green-tint panel with phone/email/address + WhatsApp button |
 | Footer | Dark footer: full logo + tagline, links, contact, admin link, copyright |
-| Buttons | Primary (green), ghost (clay outline), dark (ink) |
+| Buttons | Primary (green), ghost (bright-green outline), dark (ink) |
 
 ---
 

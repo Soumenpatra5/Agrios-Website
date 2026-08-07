@@ -70,12 +70,14 @@ its color tokens, component library, and page specs are the blueprint. The curre
 
 ## Design tokens (from the Build Bible — do not drift)
 
-- Paper `#FAF9F5`, Paper-2 `#F3F1E9`
-- Green (primary) `#3D6B4F`, Green-dark `#2F5540`, Green-tint `#EDF1EA`
-- Terracotta (accent) `#CC785C`, Clay-tint `#F7EDE8`
-- Ink `#1A1A17`, Muted `#5A574E`, Line `#E4E0D5`
+- Paper `#FFFFFF`, Paper-2 `#F4F8F5` (card-view page canvas `#ECF1ED`)
+- Green (primary) `#14532D`, Green-dark `#0E3D20`, Green-tint `#E6F0E9`
+- Bright green (accent) `#16A34A`, Accent-tint `#DCFCE7`
+- Ink `#0F1F16`, Muted `#4E5B54`, Line `#E4EAE5`
 - Font: Hanken Grotesk (Google Fonts)
-- Card radius 14px, generous whitespace, one accent (green primary, terracotta sparingly)
+- Card radius 14px, generous whitespace, one accent (deep green primary, bright green sparingly)
+- Layout: every content section sits in its own white card on the tinted canvas (public site + admin); full-width bands are rounded coloured cards
+- Palette + card view set by the owner on 2026-08-07, replacing the original green/terracotta on warm paper (this section is now the current source of truth for colour)
 - Tagline: **Smart Farming. Better Future.**
 
 ## Things that still need the owner (Soumen / Saikat) — not your job to invent
