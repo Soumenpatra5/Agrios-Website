@@ -39,7 +39,7 @@
 
   /* Main */
   .main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column;min-width:0}
-  .topbar{height:60px;background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 26px;position:sticky;top:0;z-index:10}
+  .topbar{height:60px;background:var(--paper);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,3vw,44px);position:sticky;top:0;z-index:10}
   .topbar h1{font-size:19px;font-weight:600}
   .topbar .tb-right{display:flex;align-items:center;gap:14px}
   .tb-btn{background:var(--green);color:#fff;padding:8px 15px;border-radius:9px;font-size:13.5px;font-weight:500;border:none}
@@ -47,7 +47,7 @@
   .tb-badge{position:relative;font-size:19px}
   .tb-badge .dot{position:absolute;top:-2px;right:-3px;width:8px;height:8px;background:var(--clay);border-radius:50%}
 
-  .content{padding:26px;flex:1}
+  .content{padding:26px clamp(20px,3vw,44px);flex:1}
   .view{display:none;animation:fade .35s ease}
   .view.active{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
