@@ -194,8 +194,9 @@
   .card{
     background:#fff;border:1px solid var(--line);border-radius:var(--radius);
     padding:26px 24px;transition:transform .18s, box-shadow .18s;
+    box-shadow:0 1px 2px rgba(20,83,45,.04),0 4px 14px rgba(20,83,45,.05);
   }
-  .card:hover{transform:translateY(-3px);box-shadow:0 8px 26px rgba(20,83,45,0.08)}
+  .card:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(20,83,45,.05),0 12px 30px rgba(20,83,45,.10)}
   .card .ic{
     width:44px;height:44px;border-radius:11px;background:var(--green-tint);color:var(--green);
     display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;
@@ -221,19 +222,24 @@
 
   /* ---------- Card view: every content section is its own card ---------- */
   body{background:#ECF1ED}
+  /* Premium canvas: soft atmospheric glow + barely-there organic grain, behind all content */
+  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(1100px 560px at 50% -8%,rgba(22,163,74,.06),transparent 62%),linear-gradient(180deg,rgba(255,255,255,.30),rgba(233,239,235,0) 38%)}
+  body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
   main.page{padding:26px clamp(16px,3vw,48px) 46px}
   main.page > section{padding:12px 0 !important}
   main.page > section > .wrap{
     background:var(--paper);
     border:1px solid var(--line);
     border-radius:var(--radius);
-    box-shadow:0 4px 20px rgba(20,83,45,0.07);
+    box-shadow:0 1px 2px rgba(20,83,45,.04),0 8px 24px rgba(20,83,45,.07);
     padding:46px clamp(24px,3vw,48px);
   }
   /* full-width bands become coloured cards instead of edge-to-edge strips */
   main.page > section.band,
   main.page > section.band-green{background:transparent !important}
-  main.page > section.band-green > .wrap{background:var(--green);border-color:var(--green)}
+  main.page > section.band-green > .wrap{background:radial-gradient(820px 420px at 12% -8%,rgba(255,255,255,.07),transparent 52%),linear-gradient(162deg,#17603a 0%,#14532d 52%,#0f3f22 100%);border-color:var(--green)}
   @media(max-width:860px){
     main.page{padding:16px 14px 32px}
     main.page > section{padding:9px 0 !important}
@@ -359,7 +365,7 @@
   .prod-cat h2{font-size:24px;font-weight:600}
   .prod-cat p{font-size:14.5px;color:var(--muted);margin-top:6px;max-width:56ch}
   .feed-feature{display:grid;grid-template-columns:1.1fr 1fr;gap:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:8px}
-  .feed-left{background:var(--green);color:#fff;padding:44px 42px}
+  .feed-left{background:radial-gradient(600px 360px at 10% 0%,rgba(255,255,255,.07),transparent 55%),linear-gradient(160deg,#17603a,#14532d 55%,#0f3f22);color:#fff;padding:44px 42px}
   .feed-left .fl-eye{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:#86EFAC;font-weight:600;margin-bottom:14px}
   .feed-left h2{font-size:30px;font-weight:600;color:#fff;margin-bottom:14px;line-height:1.15}
   .feed-left p{font-size:15.5px;color:#DCE7DF;line-height:1.6;margin-bottom:14px}
