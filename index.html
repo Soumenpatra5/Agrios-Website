@@ -159,6 +159,13 @@
   .btn-ghost:hover{background:var(--clay-tint)}
   .btn-dark{background:var(--ink);color:var(--paper)}
   .btn-dark:hover{opacity:.88}
+  /* 3D press effect: raised solid edge, lifts on hover, presses down on click */
+  .btn-primary,.btn-dark,.wa-btn{box-shadow:0 4px 0 rgba(0,0,0,.26),0 7px 14px rgba(0,0,0,.20)}
+  .btn-primary:hover,.btn-dark:hover,.wa-btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 rgba(0,0,0,.26),0 12px 20px rgba(0,0,0,.26)}
+  .btn-primary:active,.btn-dark:active,.wa-btn:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.26),0 3px 6px rgba(0,0,0,.22)}
+  .btn-ghost{box-shadow:0 3px 0 rgba(22,163,74,.18),0 5px 10px rgba(0,0,0,.05)}
+  .btn-ghost:hover{transform:translateY(-2px);box-shadow:0 5px 0 rgba(22,163,74,.22),0 9px 14px rgba(0,0,0,.07)}
+  .btn-ghost:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(22,163,74,.18),0 2px 5px rgba(0,0,0,.05)}
 
   .stat-stack{display:flex;flex-direction:column;gap:14px}
   .stat-card{border-radius:var(--radius);padding:22px 24px}
@@ -370,7 +377,7 @@
   .info-row .t{font-size:13px;color:var(--muted)}
   .info-row .v{font-size:15.5px;font-weight:500;color:var(--ink)}
   .wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
-    background:#25D366;color:#fff;padding:13px;border-radius:11px;font-weight:600;font-size:15px;cursor:pointer;transition:opacity .18s}
+    background:#25D366;color:#fff;padding:13px;border-radius:11px;font-weight:600;font-size:15px;cursor:pointer;transition:transform .14s,box-shadow .14s,opacity .18s}
   .wa-btn:hover{opacity:.9}
   .note{font-size:12.5px;color:var(--muted);margin-top:10px}
 
