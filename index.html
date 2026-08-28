@@ -153,19 +153,31 @@
   .hero .lead{margin-bottom:30px}
   .btn-row{display:flex;gap:12px;flex-wrap:wrap}
   .btn{padding:12px 24px;border-radius:10px;font-weight:500;font-size:15px;cursor:pointer;transition:all .18s;border:1px solid transparent}
-  .btn-primary{background:var(--green);color:var(--paper)}
-  .btn-primary:hover{background:var(--green-d)}
-  .btn-ghost{background:transparent;color:var(--clay);border-color:var(--clay)}
-  .btn-ghost:hover{background:var(--clay-tint)}
-  .btn-dark{background:var(--ink);color:var(--paper)}
-  .btn-dark:hover{opacity:.88}
-  /* 3D press effect: raised solid edge, lifts on hover, presses down on click */
-  .btn-primary,.btn-dark,.wa-btn{box-shadow:0 7px 0 rgba(0,0,0,.34),0 12px 20px rgba(0,0,0,.26)}
-  .btn-primary:hover,.btn-dark:hover,.wa-btn:hover{transform:translateY(-3px);box-shadow:0 10px 0 rgba(0,0,0,.34),0 18px 30px rgba(0,0,0,.32)}
-  .btn-primary:active,.btn-dark:active,.wa-btn:active{transform:translateY(6px);box-shadow:0 1px 0 rgba(0,0,0,.34),0 2px 5px rgba(0,0,0,.22)}
-  .btn-ghost{box-shadow:0 6px 0 rgba(22,163,74,.26),0 9px 16px rgba(0,0,0,.08)}
-  .btn-ghost:hover{transform:translateY(-3px);box-shadow:0 9px 0 rgba(22,163,74,.30),0 15px 22px rgba(0,0,0,.10)}
-  .btn-ghost:active{transform:translateY(6px);box-shadow:0 1px 0 rgba(22,163,74,.26),0 2px 5px rgba(0,0,0,.07)}
+  /* ---------- Premium 3D buttons (gradient + bevel + colour-matched depth edge) ---------- */
+  .btn-primary{
+    background:linear-gradient(180deg,#1a6338 0%,#14532d 55%,#103f22 100%);color:var(--paper);
+    border:1px solid rgba(255,255,255,.10);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(0,0,0,.20),0 4px 0 #0a2e18,0 9px 20px rgba(10,35,20,.24);
+  }
+  .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:inset 0 1px 0 rgba(255,255,255,.20),inset 0 -1px 0 rgba(0,0,0,.20),0 6px 0 #0a2e18,0 14px 26px rgba(10,35,20,.30)}
+  .btn-primary:active{transform:translateY(3px);filter:brightness(.98);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 1px 0 #0a2e18,0 2px 6px rgba(10,35,20,.24)}
+  .btn-dark{
+    background:linear-gradient(180deg,#1b3626 0%,#0f1f16 55%,#070f0a 100%);color:var(--paper);
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -1px 0 rgba(0,0,0,.25),0 4px 0 #050c07,0 9px 20px rgba(0,0,0,.28);
+  }
+  .btn-dark:hover{transform:translateY(-2px);filter:brightness(1.10);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -1px 0 rgba(0,0,0,.25),0 6px 0 #050c07,0 14px 26px rgba(0,0,0,.34)}
+  .btn-dark:active{transform:translateY(3px);filter:brightness(.96);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 1px 0 #050c07,0 2px 6px rgba(0,0,0,.26)}
+  /* Secondary (outline) — lighter, still interactive */
+  .btn-ghost{
+    background:transparent;color:var(--clay);border-color:var(--clay);
+    box-shadow:0 2px 0 rgba(22,163,74,.22),0 6px 14px rgba(0,0,0,.06);
+  }
+  .btn-ghost:hover{background:var(--clay-tint);transform:translateY(-2px);box-shadow:0 4px 0 rgba(22,163,74,.28),0 10px 18px rgba(0,0,0,.09)}
+  .btn-ghost:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(22,163,74,.22),0 2px 6px rgba(0,0,0,.06)}
+  /* Keyboard focus ring (accessibility) */
+  .btn:focus-visible,.wa-btn:focus-visible{outline:3px solid #16A34A;outline-offset:3px}
+  @media(prefers-reduced-motion:reduce){.btn,.wa-btn{transition-duration:.01ms}.btn:hover,.btn:active,.wa-btn:hover,.wa-btn:active{transform:none}}
 
   .stat-stack{display:flex;flex-direction:column;gap:14px}
   .stat-card{border-radius:var(--radius);padding:22px 24px}
@@ -377,8 +389,13 @@
   .info-row .t{font-size:13px;color:var(--muted)}
   .info-row .v{font-size:15.5px;font-weight:500;color:var(--ink)}
   .wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
-    background:#25D366;color:#fff;padding:13px;border-radius:11px;font-weight:600;font-size:15px;cursor:pointer;transition:transform .14s,box-shadow .14s,opacity .18s}
-  .wa-btn:hover{opacity:.9}
+    --wa-grad:linear-gradient(180deg,#33d873 0%,#25d366 55%,#1eae56 100%);--wa-edge:#128c44;
+    background:var(--wa-grad);color:#fff;padding:13px;border-radius:11px;font-weight:600;font-size:15px;cursor:pointer;
+    border:1px solid rgba(255,255,255,.16);transition:transform .14s,box-shadow .14s,filter .18s;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.26),inset 0 -1px 0 rgba(0,0,0,.14),0 4px 0 var(--wa-edge),0 9px 20px rgba(0,0,0,.20)}
+  .wa-btn:hover{transform:translateY(-2px);filter:brightness(1.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.30),inset 0 -1px 0 rgba(0,0,0,.14),0 6px 0 var(--wa-edge),0 14px 26px rgba(0,0,0,.26)}
+  .wa-btn:active{transform:translateY(3px);filter:brightness(.98);box-shadow:inset 0 1px 0 rgba(255,255,255,.20),0 1px 0 var(--wa-edge),0 2px 6px rgba(0,0,0,.22)}
+  .wa-btn.wa-brand{--wa-grad:linear-gradient(180deg,#1a6338 0%,#14532d 55%,#103f22 100%);--wa-edge:#0a2e18}
   .note{font-size:12.5px;color:var(--muted);margin-top:10px}
 
   /* ---------- Footer ---------- */
@@ -946,7 +963,7 @@
             <div class="ic">📍</div>
             <div><div class="t">Farm location</div><div class="v">Andharia, Binpur, Jhargram,<br>West Bengal – 721504</div></div>
           </div>
-          <a class="wa-btn" href="https://wa.me/919749163932?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20visit%20to%20the%20AgriOS%20farm." target="_blank" rel="noopener" style="background:var(--green);margin-bottom:10px">
+          <a class="wa-btn wa-brand" href="https://wa.me/919749163932?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20visit%20to%20the%20AgriOS%20farm." target="_blank" rel="noopener" style="margin-bottom:10px">
             <span style="font-size:18px">📅</span> Schedule a farm visit
           </a>
           <a class="wa-btn" href="https://wa.me/919749163932" target="_blank" rel="noopener">
