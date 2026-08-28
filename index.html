@@ -139,6 +139,12 @@
     font-size:12px;letter-spacing:1.6px;text-transform:uppercase;
     color:var(--green);font-weight:600;margin-bottom:14px;
   }
+  .eyebrow::before{content:"";display:inline-block;width:22px;height:2px;background:var(--clay);border-radius:2px;vertical-align:middle;margin:-2px 10px 0 0}
+  /* Subtle scroll-reveal — only when motion is allowed (reduced-motion keeps everything visible) */
+  @media(prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
+    .reveal.in{opacity:1;transform:none}
+  }
   h1{font-size:clamp(30px,5vw,52px);line-height:1.08;font-weight:600;letter-spacing:-0.02em}
   h2{font-size:clamp(24px,3.4vw,34px);line-height:1.15;font-weight:600;letter-spacing:-0.015em}
   h3{font-size:19px;font-weight:600;letter-spacing:-0.01em}
@@ -149,6 +155,8 @@
   /* ---------- Hero ---------- */
   .hero{padding:84px 0 72px}
   .hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+  /* Hero card: faint atmospheric glow behind the stats for presence */
+  main.page > section.hero > .wrap{background:radial-gradient(720px 440px at 90% -12%,rgba(22,163,74,.06),transparent 55%),#fff}
   .hero h1{margin-bottom:20px}
   .hero .lead{margin-bottom:30px}
   .btn-row{display:flex;gap:12px;flex-wrap:wrap}
@@ -180,11 +188,11 @@
   @media(prefers-reduced-motion:reduce){.btn,.wa-btn{transition-duration:.01ms}.btn:hover,.btn:active,.wa-btn:hover,.wa-btn:active{transform:none}}
 
   .stat-stack{display:flex;flex-direction:column;gap:14px}
-  .stat-card{border-radius:var(--radius);padding:22px 24px}
+  .stat-card{border-radius:var(--radius);padding:22px 24px;border:1px solid rgba(20,83,45,.08);box-shadow:0 1px 2px rgba(20,83,45,.04),0 6px 18px rgba(20,83,45,.06)}
   .stat-card .num{font-size:34px;font-weight:600;letter-spacing:-0.02em;line-height:1}
   .stat-card .lbl{font-size:13.5px;color:var(--muted);margin-top:6px}
-  .stat-green{background:var(--green-tint)} .stat-green .num{color:var(--green)}
-  .stat-clay{background:var(--clay-tint)} .stat-clay .num{color:var(--clay)}
+  .stat-green{background:linear-gradient(160deg,#edf4ef,#e2ede6)} .stat-green .num{color:var(--green)}
+  .stat-clay{background:linear-gradient(160deg,#e5fbec,#d3f4dd)} .stat-clay .num{color:var(--clay)}
   .stat-row{display:flex;gap:14px}
   .stat-row .stat-card{flex:1}
 
@@ -197,6 +205,10 @@
     box-shadow:0 1px 2px rgba(20,83,45,.04),0 4px 14px rgba(20,83,45,.05);
   }
   .card:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(20,83,45,.05),0 12px 30px rgba(20,83,45,.10)}
+  /* Card elevation system — Level 1 (interactive cards) + Level 2 (big panels) */
+  .prod,.cert,.loop-step{box-shadow:0 1px 2px rgba(20,83,45,.04),0 4px 14px rgba(20,83,45,.05);transition:transform .18s,box-shadow .18s}
+  .prod:hover,.cert:hover,.loop-step:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(20,83,45,.05),0 12px 30px rgba(20,83,45,.10)}
+  .impact,.founder{box-shadow:0 1px 2px rgba(20,83,45,.04),0 8px 24px rgba(20,83,45,.06)}
   .card .ic{
     width:44px;height:44px;border-radius:11px;background:var(--green-tint);color:var(--green);
     display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;
@@ -1075,6 +1087,7 @@
   function go(id, noScroll){
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
+    document.getElementById(id).querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
     document.querySelectorAll('.navlinks a[data-nav]').forEach(a=>{
       a.classList.toggle('active', a.getAttribute('data-nav')===id);
     });
@@ -1263,6 +1276,16 @@
       requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
+  })();
+
+  // ---------- Subtle scroll-reveal: sections fade up as they enter view (hero excluded so it shows instantly) ----------
+  (function scrollReveal(){
+    if(!('IntersectionObserver' in window)) return;
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:.06, rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('main.page > section:not(.hero) > .wrap').forEach(function(w){ w.classList.add('reveal'); io.observe(w); });
   })();
 </script>
 </body>
