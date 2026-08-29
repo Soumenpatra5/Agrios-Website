@@ -283,7 +283,8 @@
 
   /* ---------- Founder note ---------- */
   .founder{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:38px 40px}
-  .founder-photo{width:96px;height:96px;border-radius:50%;background:var(--green-tint);display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0}
+  .founder-photo{width:96px;height:96px;border-radius:50%;background:var(--green-tint);display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0;overflow:hidden;box-shadow:0 3px 12px rgba(20,83,45,.18)}
+  .founder-photo img{width:100%;height:100%;object-fit:cover;display:block}
   .founder blockquote{font-size:19px;line-height:1.6;color:var(--ink);font-weight:500;margin-bottom:18px;font-style:normal}
   .founder .sign{font-size:15px;color:var(--muted)}
   .founder .sign strong{color:var(--ink);display:block;font-size:16px}
@@ -585,7 +586,7 @@
       <div class="eyebrow">A word from our founder</div>
       <h2 style="margin-bottom:26px;max-width:20ch">Built on the ground, not on paper</h2>
       <div class="founder">
-        <div class="founder-photo">👨‍🌾</div>
+        <div class="founder-photo"><img src="founder.jpg" alt="Soumen Patra, Founder &amp; Managing Promoter" draggable="false" onerror="this.parentElement.textContent='👨‍🌾'"></div>
         <div>
           <blockquote>"I didn't start with a plan on paper — I started on real farms, learning pigs, poultry and fish by doing. AgriOS is my vision of what a modern Indian farm can be: diversified, scientific, sustainable, and profitable. We're building something the next generation of farmers can look to."</blockquote>
           <div class="sign"><strong>Soumen Patra</strong>Founder &amp; Managing Promoter, AgriOS Integrated Farm Pvt Ltd</div>
