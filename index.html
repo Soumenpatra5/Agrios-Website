@@ -82,7 +82,8 @@
     -webkit-font-smoothing:antialiased;
   }
   a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
+  img{max-width:100%;display:block;-webkit-user-drag:none;-khtml-user-drag:none;user-select:none}
+  svg{-webkit-user-drag:none;user-select:none}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,4vw,64px)}
 
   /* ---------- Header ---------- */
@@ -474,7 +475,7 @@
 <header>
   <div class="wrap nav">
     <div class="brand" onclick="go('home')" style="cursor:pointer">
-      <img class="brand-logo" src="logo-header.png" alt="AgriOS Integrated Farm Pvt Ltd">
+      <img class="brand-logo" src="logo-header.png" alt="AgriOS Integrated Farm Pvt Ltd" draggable="false">
     </div>
     <nav class="navlinks" id="navlinks">
       <a data-nav="home" class="active" onclick="go('home')">Home</a>
@@ -1068,7 +1069,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <img class="footer-logo" src="logo-footer.png" alt="AgriOS Integrated Farm Pvt Ltd">
+        <img class="footer-logo" src="logo-footer.png" alt="AgriOS Integrated Farm Pvt Ltd" draggable="false">
         <p>A closed-loop integrated farm in Jhargram, West Bengal — raising poultry, livestock, fish and crops as one connected system.</p>
         <p class="footer-tag">Smart Farming. Better Future.</p>
         <div class="social-row" aria-label="Social media">
