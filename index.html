@@ -898,7 +898,7 @@
         <h2>Live breeding stock</h2>
         <p>Healthy, well-raised young stock from our own breeding units — for farmers building or expanding their own farms.</p>
       </div>
-      <div class="prod-grid">
+      <div class="prod-grid" data-cat="breeding">
         <div class="prod">
           <div class="top" style="background:var(--clay-tint)"><svg class="ei"><use href="#i-pig"/></svg></div>
           <div class="body"><span class="avail">Coming soon</span><h3 style="margin-top:12px">Piglets</h3><p>Crossbred piglets from our scientific breeding unit.</p></div>
@@ -923,7 +923,7 @@
         <h2>Farm produce</h2>
         <p>Fresh fruit and spice, grown on organic compost from our own integrated cycle.</p>
       </div>
-      <div class="prod-grid">
+      <div class="prod-grid" data-cat="produce">
         <div class="prod">
           <div class="top" style="background:var(--green-tint)"><svg class="ei"><use href="#i-plant"/></svg></div>
           <div class="body"><span class="soon">Coming soon</span><h3 style="margin-top:12px">Bananas</h3><p>Malbhog, Martaman and more, ripened on the plant.</p></div>
@@ -944,7 +944,7 @@
         <h2>Farm-fresh goods</h2>
         <p>Honest, responsibly-raised products, coming to market under the AgriOS name.</p>
       </div>
-      <div class="prod-grid">
+      <div class="prod-grid" data-cat="freshgoods">
         <div class="prod">
           <div class="top" style="background:var(--clay-tint)"><svg class="ei"><use href="#i-honey"/></svg></div>
           <div class="body"><span class="soon">Coming soon</span><h3 style="margin-top:12px">Raw honey</h3><p>Pure honey from our own hives, harvested on the farm.</p></div>
@@ -1315,6 +1315,54 @@
       entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
     },{threshold:.06, rootMargin:'0px 0px -6% 0px'});
     document.querySelectorAll('main.page > section:not(.hero) > .wrap').forEach(function(w){ w.classList.add('reveal'); io.observe(w); });
+  })();
+</script>
+
+<!-- ============ FIREBASE: live products (public read, safe fallback) ============ -->
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script>
+  (function(){
+    var firebaseConfig = {
+      apiKey: "AIzaSyChoMIPjIdfu13DfhTTLzRaef7pgBFd5kU",
+      authDomain: "agrios-website.firebaseapp.com",
+      projectId: "agrios-website",
+      storageBucket: "agrios-website.firebasestorage.app",
+      messagingSenderId: "912560086935",
+      appId: "1:912560086935:web:014bc99ce03f5c97656ed2"
+    };
+    if (typeof firebase === 'undefined') return; // SDK blocked/offline -> keep hardcoded cards
+    try { firebase.initializeApp(firebaseConfig); } catch(e){}
+    var db;
+    try { db = firebase.firestore(); } catch(e){ return; }
+
+    var CAT_ORDER = ['breeding','produce','freshgoods'];
+    function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+    function cardHTML(p){
+      var bg = (p.bg === 'green') ? 'var(--green-tint)' : 'var(--clay-tint)';
+      var icon = p.icon || 'i-sprout';
+      return '<div class="prod">'
+        + '<div class="top" style="background:'+bg+'"><svg class="ei"><use href="#'+esc(icon)+'"/></svg></div>'
+        + '<div class="body"><span class="soon">'+esc(p.avail || 'Coming soon')+'</span>'
+        + '<h3 style="margin-top:12px">'+esc(p.title || '')+'</h3>'
+        + '<p>'+esc(p.desc || '')+'</p></div></div>';
+    }
+
+    db.collection('products').get().then(function(snap){
+      if (snap.empty) return; // no data yet -> keep the hardcoded fallback cards
+      var byCat = {};
+      snap.forEach(function(d){
+        var p = d.data();
+        if (p.published === false) return;         // hidden products don't show
+        (byCat[p.category] = byCat[p.category] || []).push(p);
+      });
+      CAT_ORDER.forEach(function(cat){
+        var grid = document.querySelector('.prod-grid[data-cat="'+cat+'"]');
+        if (!grid || !byCat[cat] || !byCat[cat].length) return; // keep fallback for empty groups
+        byCat[cat].sort(function(a,b){ return (a.order||0) - (b.order||0); });
+        grid.innerHTML = byCat[cat].map(cardHTML).join('');
+      });
+    }).catch(function(e){ /* offline / rules -> keep hardcoded fallback */ });
   })();
 </script>
 </body>

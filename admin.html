@@ -278,14 +278,9 @@
           </div>
         </div>
         <div class="panel">
-          <div class="panel-head"><h2>Products</h2><span class="ph-act">+ Add product</span></div>
-          <div class="panel-body">
-            <div class="edit-row"><div><div class="er-l">🌾 AgriOS feed (own brand)</div><div class="er-s">Proprietary formula · major line · formula hidden on site</div></div><div style="display:flex;gap:8px"><button class="mini-btn">Edit</button><button class="mini-btn green">Go live</button></div></div>
-            <div class="edit-row"><div><div class="er-l">🐷 Breeding stock (piglets, kids, ducklings, fingerlings)</div><div class="er-s">Status: Available fairly soon</div></div><div style="display:flex;gap:8px"><button class="mini-btn">Edit</button><button class="mini-btn green">Go live</button></div></div>
-            <div class="edit-row"><div><div class="er-l">🍌 Farm produce (banana, papaya, black pepper)</div><div class="er-s">Status: Coming soon</div></div><div style="display:flex;gap:8px"><button class="mini-btn">Edit</button><button class="mini-btn green">Go live</button></div></div>
-            <div class="edit-row"><div><div class="er-l">🍯 Farm-fresh (honey, eggs, meat)</div><div class="er-s">Status: Coming soon</div></div><div style="display:flex;gap:8px"><button class="mini-btn">Edit</button><button class="mini-btn green">Go live</button></div></div>
-            <div class="edit-row" style="margin-bottom:0"><div><div class="er-l">🌱 Cocopeat unit</div><div class="er-s">Status: Planned · Year 5</div></div><div style="display:flex;gap:8px"><button class="mini-btn">Edit</button><span class="pill pill-blue">Year 5</span></div></div>
-            <p class="demo-note">When you tap "Go live", the product moves from "Coming soon" to a real listing on the public site. The feed formula stays confidential — only the brand and product show publicly.</p>
+          <div class="panel-head"><h2>Products <span style="font-size:11px;font-weight:600;color:#16A34A;background:#DCFCE7;padding:2px 8px;border-radius:20px;vertical-align:middle">LIVE · saves to website</span></h2><span class="ph-act" id="prodHeadAct" style="display:none" onclick="AgProducts.openForm()">+ Add product</span></div>
+          <div class="panel-body" id="prodPanelBody">
+            <p style="font-size:13px;color:var(--muted)">Loading…</p>
           </div>
         </div>
       </div>
@@ -347,6 +342,182 @@
     document.getElementById('sidebar').classList.remove('open');
     window.scrollTo({top:0,behavior:'smooth'});
   }
+</script>
+
+<!-- ============ FIREBASE: real Products editor (Auth + Firestore) ============ -->
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script>
+var AgProducts = (function(){
+  var firebaseConfig = {
+    apiKey: "AIzaSyChoMIPjIdfu13DfhTTLzRaef7pgBFd5kU",
+    authDomain: "agrios-website.firebaseapp.com",
+    projectId: "agrios-website",
+    storageBucket: "agrios-website.firebasestorage.app",
+    messagingSenderId: "912560086935",
+    appId: "1:912560086935:web:014bc99ce03f5c97656ed2"
+  };
+
+  var CATS = [
+    {key:'breeding',  label:'Live breeding stock'},
+    {key:'produce',   label:'Farm produce'},
+    {key:'freshgoods',label:'Farm-fresh goods'}
+  ];
+  var ICONS = ['i-pig','i-goat','i-duck','i-fish','i-poultry','i-plant','i-pepper','i-leaf','i-sprout','i-wheat','i-honey','i-egg','i-meat','i-bee'];
+
+  // the 11 current site products, for the one-time import
+  var SEED = [
+    {category:'breeding', title:'Piglets',           desc:'Crossbred piglets from our scientific breeding unit.', icon:'i-pig',  bg:'clay',  avail:'Coming soon', order:1, published:true},
+    {category:'breeding', title:'Goat kids',         desc:'Healthy kids for meat and breeding, ICAR-guided rearing.', icon:'i-goat', bg:'green', avail:'Coming soon', order:2, published:true},
+    {category:'breeding', title:'Ducklings',         desc:'Khaki Campbell and Pekin ducklings for eggs and meat.', icon:'i-duck', bg:'clay',  avail:'Coming soon', order:3, published:true},
+    {category:'breeding', title:'Fish fingerlings',  desc:'Rohu, Catla, Mrigal and more, from our own ponds.', icon:'i-fish', bg:'green', avail:'Coming soon', order:4, published:true},
+    {category:'produce',  title:'Bananas',           desc:'Malbhog, Martaman and more, ripened on the plant.', icon:'i-plant', bg:'green', avail:'Coming soon', order:1, published:true},
+    {category:'produce',  title:'Papaya',            desc:'Red Lady 786 — sweet, firm and market-grade.', icon:'i-plant', bg:'clay', avail:'Coming soon', order:2, published:true},
+    {category:'produce',  title:'Black pepper',      desc:'Golmorich grown along our boundary plantation.', icon:'i-pepper', bg:'green', avail:'Coming soon', order:3, published:true},
+    {category:'freshgoods', title:'Raw honey',       desc:'Pure honey from our own hives, harvested on the farm.', icon:'i-honey', bg:'clay', avail:'Coming soon', order:1, published:true},
+    {category:'freshgoods', title:'Farm eggs',       desc:'Fresh duck and poultry eggs from healthy, well-kept flocks.', icon:'i-egg', bg:'green', avail:'Coming soon', order:2, published:true},
+    {category:'freshgoods', title:'Farm meat',       desc:'Responsibly-raised goat, pig and poultry from our own units.', icon:'i-meat', bg:'clay', avail:'Coming soon', order:3, published:true},
+    {category:'freshgoods', title:'Cocopeat',        desc:'A dedicated cocopeat unit — planned as we scale.', icon:'i-sprout', bg:'green', avail:'Year 5', order:4, published:true}
+  ];
+
+  var db, auth, ready=false, user=null, editingId=null;
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function body(){ return document.getElementById('prodPanelBody'); }
+  function headAct(){ return document.getElementById('prodHeadAct'); }
+  function catLabel(k){ for(var i=0;i<CATS.length;i++){ if(CATS[i].key===k) return CATS[i].label; } return k; }
+
+  function init(){
+    if (typeof firebase === 'undefined'){ body().innerHTML = '<p class="demo-note">Couldn\'t load Firebase (offline or blocked). The public site still shows the built-in product list.</p>'; return; }
+    try { firebase.initializeApp(firebaseConfig); } catch(e){}
+    db = firebase.firestore(); auth = firebase.auth(); ready = true;
+    auth.onAuthStateChanged(function(u){ user = u; render(); });
+  }
+
+  // ---------- login gate ----------
+  function render(){
+    if (!ready) return;
+    if (!user){ renderLogin(); headAct().style.display='none'; return; }
+    renderList();
+  }
+
+  function renderLogin(){
+    body().innerHTML =
+      '<p style="font-size:13px;color:var(--muted);margin-bottom:14px">Log in to edit the products shown on your public website.</p>'
+      + '<label class="field-lbl">Email</label><input class="inp" id="agEmail" type="email" autocomplete="username" placeholder="you@example.com">'
+      + '<label class="field-lbl">Password</label><input class="inp" id="agPass" type="password" autocomplete="current-password" placeholder="••••••••">'
+      + '<button class="tb-btn" style="width:100%;margin-top:6px" id="agLoginBtn">Log in</button>'
+      + '<p id="agErr" style="color:#B91C1C;font-size:12.5px;margin-top:10px;display:none"></p>';
+    document.getElementById('agLoginBtn').onclick = doLogin;
+    document.getElementById('agPass').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
+  }
+  function doLogin(){
+    var em=document.getElementById('agEmail').value.trim(), pw=document.getElementById('agPass').value;
+    var err=document.getElementById('agErr'); err.style.display='none';
+    var btn=document.getElementById('agLoginBtn'); btn.textContent='Logging in…'; btn.disabled=true;
+    auth.signInWithEmailAndPassword(em,pw).catch(function(e){
+      err.textContent = (e.code==='auth/invalid-credential'||e.code==='auth/wrong-password'||e.code==='auth/user-not-found') ? 'Wrong email or password.' : (e.message||'Login failed.');
+      err.style.display='block'; btn.textContent='Log in'; btn.disabled=false;
+    });
+  }
+  function logout(){ auth.signOut(); }
+
+  // ---------- product list ----------
+  function renderList(){
+    headAct().style.display='';
+    body().innerHTML = '<p style="font-size:13px;color:var(--muted)">Loading products…</p>';
+    db.collection('products').get().then(function(snap){
+      var items=[]; snap.forEach(function(d){ var o=d.data(); o.id=d.id; items.push(o); });
+      var top =
+        '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">'
+        + '<span style="font-size:12.5px;color:var(--muted)">Logged in as <strong>'+esc(user.email)+'</strong></span>'
+        + '<button class="mini-btn" id="agLogout">Log out</button></div>';
+      if (!items.length){
+        body().innerHTML = top
+          + '<div class="edit-row"><div><div class="er-l">No products in the database yet</div><div class="er-s">Import your current 11 website products to start editing them.</div></div>'
+          + '<button class="mini-btn green" id="agImport">Import current products</button></div>'
+          + '<p class="demo-note">Or use “+ Add product” above to create one from scratch.</p>';
+        document.getElementById('agImport').onclick = importSeed;
+        document.getElementById('agLogout').onclick = logout;
+        return;
+      }
+      var html = top;
+      CATS.forEach(function(c){
+        var group = items.filter(function(p){return p.category===c.key;}).sort(function(a,b){return (a.order||0)-(b.order||0);});
+        if (!group.length) return;
+        html += '<div class="er-l" style="margin:14px 0 8px">'+esc(c.label)+'</div>';
+        group.forEach(function(p){
+          var hidden = p.published===false;
+          html += '<div class="edit-row"><div><div class="er-l">'+esc(p.title)+(hidden?' <span class="pill pill-amber">Hidden</span>':'')+'</div>'
+            + '<div class="er-s">'+esc(p.avail||'')+'</div></div>'
+            + '<div style="display:flex;gap:8px">'
+            + '<button class="mini-btn" data-edit="'+esc(p.id)+'">Edit</button>'
+            + '<button class="mini-btn" data-del="'+esc(p.id)+'" style="color:#B91C1C">Delete</button></div></div>';
+        });
+      });
+      body().innerHTML = html;
+      document.getElementById('agLogout').onclick = logout;
+      body().querySelectorAll('[data-edit]').forEach(function(b){ b.onclick=function(){ openForm(items.filter(function(p){return p.id===b.getAttribute('data-edit');})[0]); }; });
+      body().querySelectorAll('[data-del]').forEach(function(b){ b.onclick=function(){ del(b.getAttribute('data-del')); }; });
+    }).catch(function(e){ body().innerHTML = '<p style="color:#B91C1C;font-size:13px">Couldn\'t load products: '+esc(e.message)+'</p>'; });
+  }
+
+  function importSeed(){
+    var btn=document.getElementById('agImport'); btn.textContent='Importing…'; btn.disabled=true;
+    var batch = db.batch();
+    SEED.forEach(function(p){ batch.set(db.collection('products').doc(), p); });
+    batch.commit().then(renderList).catch(function(e){ alert('Import failed: '+e.message); btn.textContent='Import current products'; btn.disabled=false; });
+  }
+
+  // ---------- add / edit form ----------
+  function openForm(p){
+    editingId = (p && p.id) || null;
+    p = p || {category:'breeding', title:'', desc:'', icon:'i-sprout', bg:'green', avail:'Coming soon', order:99, published:true};
+    var opt=function(list,val,useLabel){ return list.map(function(x){ var v=useLabel?x.key:x, l=useLabel?x.label:x; return '<option value="'+esc(v)+'"'+(v===val?' selected':'')+'>'+esc(l)+'</option>'; }).join(''); };
+    body().innerHTML =
+      '<div class="er-l" style="margin-bottom:12px">'+(editingId?'Edit product':'New product')+'</div>'
+      + '<label class="field-lbl">Group</label><select class="inp" id="fCat">'+opt(CATS,p.category,true)+'</select>'
+      + '<label class="field-lbl">Name</label><input class="inp" id="fTitle" value="'+esc(p.title)+'" placeholder="e.g. Farm eggs">'
+      + '<label class="field-lbl">Short description</label><input class="inp" id="fDesc" value="'+esc(p.desc)+'" placeholder="One line about this product">'
+      + '<label class="field-lbl">Availability label</label><input class="inp" id="fAvail" value="'+esc(p.avail)+'" placeholder="Coming soon">'
+      + '<div style="display:flex;gap:12px"><div style="flex:1"><label class="field-lbl">Icon</label><select class="inp" id="fIcon">'+opt(ICONS,p.icon,false)+'</select></div>'
+      + '<div style="flex:1"><label class="field-lbl">Icon colour</label><select class="inp" id="fBg"><option value="green"'+(p.bg==='green'?' selected':'')+'>Green</option><option value="clay"'+(p.bg!=='green'?' selected':'')+'>Amber</option></select></div>'
+      + '<div style="width:90px"><label class="field-lbl">Order</label><input class="inp" id="fOrder" type="number" value="'+(p.order||1)+'"></div></div>'
+      + '<label class="field-lbl" style="display:flex;align-items:center;gap:8px;margin-top:14px"><input type="checkbox" id="fPub"'+(p.published!==false?' checked':'')+' style="width:auto"> Show on public website</label>'
+      + '<div style="display:flex;gap:10px;margin-top:16px"><button class="tb-btn" id="fSave" style="flex:1">Save</button><button class="mini-btn" id="fCancel">Cancel</button>'
+      + (editingId?'':'')+'</div>'
+      + '<p id="fErr" style="color:#B91C1C;font-size:12.5px;margin-top:10px;display:none"></p>';
+    document.getElementById('fCancel').onclick = renderList;
+    document.getElementById('fSave').onclick = save;
+  }
+
+  function save(){
+    var data = {
+      category: document.getElementById('fCat').value,
+      title: document.getElementById('fTitle').value.trim(),
+      desc: document.getElementById('fDesc').value.trim(),
+      avail: document.getElementById('fAvail').value.trim() || 'Coming soon',
+      icon: document.getElementById('fIcon').value,
+      bg: document.getElementById('fBg').value,
+      order: parseInt(document.getElementById('fOrder').value,10) || 1,
+      published: document.getElementById('fPub').checked
+    };
+    var err=document.getElementById('fErr');
+    if (!data.title){ err.textContent='Please enter a product name.'; err.style.display='block'; return; }
+    var btn=document.getElementById('fSave'); btn.textContent='Saving…'; btn.disabled=true;
+    var op = editingId ? db.collection('products').doc(editingId).set(data) : db.collection('products').add(data);
+    op.then(renderList).catch(function(e){ err.textContent='Save failed: '+e.message; err.style.display='block'; btn.textContent='Save'; btn.disabled=false; });
+  }
+
+  function del(id){
+    if (!confirm('Delete this product? It will be removed from the public website.')) return;
+    db.collection('products').doc(id).delete().then(renderList).catch(function(e){ alert('Delete failed: '+e.message); });
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+  return { openForm: function(){ openForm(); } };
+})();
 </script>
 </body>
 </html>
