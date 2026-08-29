@@ -426,6 +426,13 @@
   footer ul a{font-size:14px;color:#C4CFC8;cursor:pointer;transition:color .15s}
   footer ul a:hover{color:#fff}
   .foot-bottom{border-top:1px solid #24332B;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:#75847C}
+  /* Mobile footer: Explore + Get in touch side by side (logo block full width on top) */
+  @media(max-width:860px){
+    footer .foot-grid{grid-template-columns:1fr 1fr;gap:22px 20px;margin-bottom:26px}
+    footer .foot-grid > :first-child{grid-column:1 / -1;margin-bottom:2px}
+    footer h4{margin-bottom:10px}
+    footer ul li{margin-bottom:8px}
+  }
 
   /* ---------- Responsive ---------- */
   @media(max-width:860px){
