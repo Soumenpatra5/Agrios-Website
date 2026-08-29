@@ -351,9 +351,9 @@
 
   .loop{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:12px}
   .loop-step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;text-align:center}
-  .loop-step .n{font-size:12px;color:var(--clay);font-weight:600;letter-spacing:1px}
-  .loop-step p{font-size:14px;margin-top:6px;color:var(--ink);font-weight:500}
-  .loop-step small{color:var(--muted);font-size:12.5px;font-weight:400}
+  .loop-step .n{font-size:13px;color:var(--clay);font-weight:700;letter-spacing:1.2px}
+  .loop-step p{font-size:clamp(15px,1.4vw,18px);margin-top:9px;color:var(--ink);font-weight:600;line-height:1.35}
+  .loop-step small{display:block;color:var(--muted);font-size:clamp(13px,1.1vw,14.5px);font-weight:400;line-height:1.45;margin-top:4px}
 
   /* ---------- Products ---------- */
   .prod-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
