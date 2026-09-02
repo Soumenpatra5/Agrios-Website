@@ -412,24 +412,27 @@
   .note{font-size:12.5px;color:var(--muted);margin-top:10px}
 
   /* ---------- Footer ---------- */
-  footer{background:var(--ink);color:#C4CFC8;padding:52px 0 30px;margin-top:20px}
-  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:36px;margin-bottom:34px}
-  .footer-logo{width:132px;height:auto;background:#fff;border-radius:12px;padding:12px;margin-bottom:14px;display:block}
-  .footer-tag{font-size:13px;color:var(--clay);font-weight:600;letter-spacing:.3px;margin-top:6px}
-  .social-row{display:flex;gap:10px;margin-top:18px}
-  .social{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.08);color:#C4CFC8;transition:background .18s,color .18s,transform .18s}
+  footer{background:var(--ink);color:#C4CFC8;padding:44px 0 26px;margin-top:20px}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:28px;margin-bottom:26px}
+  .footer-logo{width:190px;height:auto;margin-bottom:16px;display:block}
+  .footer-tag{font-size:13px;color:var(--clay);font-weight:600;letter-spacing:.3px;margin-top:8px}
+  .social-row{display:flex;gap:10px;margin-top:20px}
+  .social{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.08);color:#C4CFC8;transition:background .18s,color .18s,transform .18s}
   .social:hover{background:var(--clay);color:#fff;transform:translateY(-2px)}
-  footer p{font-size:14px;color:#93A099;max-width:38ch}
-  footer h4{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#75847C;margin-bottom:14px;font-weight:600}
+  .social:focus-visible{outline:2px solid var(--clay);outline-offset:3px}
+  footer p{font-size:14px;line-height:1.55;color:#93A099;max-width:34ch}
+  footer h4{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:#75847C;margin-bottom:12px;font-weight:600}
   footer ul{list-style:none}
-  footer ul li{margin-bottom:9px}
+  footer ul li{margin-bottom:8px}
   footer ul a{font-size:14px;color:#C4CFC8;cursor:pointer;transition:color .15s}
-  footer ul a:hover{color:#fff}
+  footer ul a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+  footer ul a:focus-visible,.foot-bottom a:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:3px}
   .foot-bottom{border-top:1px solid #24332B;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:#75847C}
   /* Mobile footer: Explore + Get in touch side by side (logo block full width on top) */
   @media(max-width:860px){
     footer .foot-grid{grid-template-columns:1fr 1fr;gap:22px 20px;margin-bottom:26px}
     footer .foot-grid > :first-child{grid-column:1 / -1;margin-bottom:2px}
+    footer .footer-logo{width:160px}
     footer h4{margin-bottom:10px}
     footer ul li{margin-bottom:8px}
   }
@@ -1082,7 +1085,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <img class="footer-logo" src="logo-footer.png" alt="AgriOS Integrated Farm Pvt Ltd" draggable="false">
+        <img class="footer-logo" src="logo-footer-white.png" alt="AgriOS Integrated Farm Pvt Ltd" draggable="false">
         <p>A closed-loop integrated farm in Jhargram, West Bengal — raising poultry, livestock, fish and crops as one connected system.</p>
         <p class="footer-tag">Smart Farming. Better Future.</p>
         <div class="social-row" aria-label="Social media">
